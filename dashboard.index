@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Accelerating Infrastructure — Consultation Intelligence · Easca Consulting</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{background:#0a0a0f;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif;font-size:14px;line-height:1.5}
+
+/* HEADER */
+.hdr{border-bottom:1px solid #1e293b;padding:1.25rem 1rem}
+.hdr-eyebrow{font-size:9px;letter-spacing:0.18em;color:#475569;font-family:'DM Mono',monospace;margin-bottom:3px;text-transform:uppercase}
+.hdr-title{font-size:1rem;font-weight:500;color:#f8fafc;letter-spacing:-0.01em;line-height:1.3}
+.hdr-sub{font-size:10px;color:#334155;margin-top:3px;font-family:'DM Mono',monospace;line-height:1.4}
+.hdr-bottom{display:flex;justify-content:space-between;align-items:flex-end;margin-top:1rem;padding-top:1rem;border-top:1px solid #1e293b}
+.hdr-num{font-size:2rem;font-weight:300;color:#22d3a5;letter-spacing:-0.04em;line-height:1}
+.hdr-numlab{font-size:9px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:2px}
+.hdr-numsub{font-size:9px;color:#334155;font-family:'DM Mono',monospace;margin-top:2px}
+
+/* BODY */
+.body{padding:1rem}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#1e293b;border-radius:8px;overflow:hidden;margin-bottom:1rem}@media(min-width:600px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
+.stat{background:#0f172a;padding:0.875rem 1rem}
+.stat-label{font-size:9px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px}
+.stat-val{font-size:1.5rem;font-weight:300;letter-spacing:-0.03em;line-height:1}
+.stat-sub{font-size:9px;color:#334155;margin-top:2px;font-family:'DM Mono',monospace}
+
+/* FILTERS */
+.filters{display:flex;gap:4px;margin-bottom:1rem;flex-wrap:wrap}
+.fb{font-size:10px;padding:5px 11px;border-radius:20px;border:1px solid #1e293b;background:transparent;color:#475569;cursor:pointer;font-family:'DM Mono',monospace;letter-spacing:0.04em;transition:all 0.15s;white-space:nowrap}
+.fb.on{border-color:#22d3a5;background:rgba(34,211,165,0.08);color:#22d3a5}
+
+/* CHARTS ROW */
+.charts-row{display:block}
+.charts-row{display:flex;flex-direction:column;gap:1rem;margin-bottom:1rem}@media(min-width:768px){.charts-row{flex-direction:row;align-items:stretch}.charts-row>div:first-child{flex:1;min-width:0}.right-col{flex:1;min-width:0;display:flex;flex-direction:column;gap:1rem}.right-col .card{flex:1}}
+/* CARD */
+.card{background:#0f172a;border:1px solid #1e293b;border-radius:10px;padding:1rem;margin-bottom:1rem}
+.card-label{font-size:9px;letter-spacing:0.15em;color:#475569;font-family:'DM Mono',monospace;text-transform:uppercase;margin-bottom:0.875rem}
+
+/* ISSUES */
+.irow{display:flex;align-items:center;gap:8px;margin-bottom:8px;cursor:pointer;padding:2px 0}
+.ilabel{flex:0 0 120px;font-size:10px;color:#64748b;font-family:'DM Mono',monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color 0.15s}@media(min-width:600px){.ilabel{flex:0 0 180px}}
+.ilabel.act{color:#f8fafc}
+.itrack{flex:1;height:3px;background:#1e293b;border-radius:1px;overflow:hidden}
+.ibar{height:100%;border-radius:1px;transition:all 0.3s ease}
+.ict{flex:0 0 24px;text-align:right;font-size:10px;color:#334155;font-family:'DM Mono',monospace;transition:color 0.15s}
+.ict.act{color:#22d3a5}
+
+/* POSITION */
+.pos-wrap{display:flex;gap:1rem;align-items:center}
+.prow{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.pdot-wrap{display:flex;align-items:center;gap:6px}
+.pdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.plabel{font-size:11px;color:#64748b;font-family:'DM Mono',monospace}
+.pcount{font-size:11px;font-family:'DM Mono',monospace}
+
+/* SECTOR */
+.srow{display:flex;align-items:center;gap:8px;margin-bottom:7px;cursor:pointer;padding:2px 0}
+.sdot{width:7px;height:7px;border-radius:2px;flex-shrink:0}
+.slabel{flex:1;font-size:11px;color:#475569;font-family:'DM Mono',monospace;transition:color 0.15s}
+.slabel.act{color:#f8fafc}
+.scount{font-size:10px;font-family:'DM Mono',monospace;color:#334155;min-width:22px;text-align:right}
+.sbar-wrap{width:40px;height:2px;background:#1e293b;border-radius:1px}
+.sbar{height:100%;border-radius:1px;opacity:0.5}
+
+/* INSIGHTS */
+.insights{display:grid;grid-template-columns:1fr;gap:1px;background:#1e293b;border-radius:10px;overflow:hidden;margin-bottom:1rem}
+@media(min-width:480px){.insights{grid-template-columns:repeat(3,1fr)}}
+.insight{background:#0a0a0f;padding:1.1rem 1rem}
+.ins-num{font-size:2rem;font-weight:300;letter-spacing:-0.04em;line-height:1;margin-bottom:3px}
+.ins-label{font-size:12px;color:#94a3b8;margin-bottom:2px}
+.ins-sub{font-size:10px;color:#334155;font-family:'DM Mono',monospace;margin-bottom:6px}
+.ins-note{font-size:10px;color:#475569;font-family:'DM Mono',monospace;border-top:1px solid #1e293b;padding-top:7px}
+
+/* TABLE */
+.tbl-card{background:#0f172a;border:1px solid #1e293b;border-radius:10px;overflow:hidden;margin-bottom:1rem}
+.tbl-hdr{padding:0.75rem 1rem;border-bottom:1px solid #1e293b;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px}
+.tbl-hdr-label{font-size:9px;letter-spacing:0.15em;color:#475569;font-family:'DM Mono',monospace;text-transform:uppercase}
+.tbl-hdr-sub{font-size:9px;color:#334155;font-family:'DM Mono',monospace}
+
+/* Mobile table: card list instead */
+.tbl-list{display:flex;flex-direction:column}
+.tbl-item{padding:0.75rem 1rem;border-bottom:1px solid #0f172a;background:#0f172a;transition:background 0.1s}
+.tbl-item:hover{background:#111827}
+.tbl-item:last-child{border-bottom:none}
+.tbl-org{font-size:12px;font-weight:500;color:#e2e8f0;margin-bottom:4px}
+.tbl-meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:4px}
+.badge{font-size:9px;padding:2px 7px;border-radius:10px;font-family:'DM Mono',monospace;display:inline-block;white-space:nowrap}
+.tbl-summary{font-size:11px;color:#475569;line-height:1.4}
+
+/* FOOTER */
+.footer{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap;padding-bottom:1rem}
+.footer-text{font-size:9px;color:#334155;font-family:'DM Mono',monospace;line-height:1.5;flex:1}
+.footer-brand{font-size:9px;color:#22d3a5;font-family:'DM Mono',monospace;letter-spacing:0.1em;white-space:nowrap}
+
+/* Active issue hint */
+.issue-hint{font-size:9px;color:#22d3a5;font-family:'DM Mono',monospace;margin-top:6px;letter-spacing:0.05em}
+
+@media(min-width:768px){
+  .body{padding:1.5rem 2rem}
+  .hdr{padding:1.5rem 2rem}
+  .hdr-title{font-size:1.3rem}
+  .hdr-num{font-size:2.8rem}
+  .stat{padding:1.25rem 1.5rem}
+  .stat-val{font-size:2rem}
+  .stat-label{font-size:11px}
+  .stat-sub{font-size:11px}
+  .card-label{font-size:11px}
+  .ilabel{flex:0 0 200px;font-size:11px}
+  .ict{font-size:11px}
+  .itrack{height:4px}
+  .slabel{font-size:12px}
+  .tbl-org{font-size:13px}
+  .tbl-summary{font-size:12px}
+  .ins-num{font-size:2.8rem}
+  .ins-label{font-size:13px}
+  .ins-sub{font-size:11px}
+  .ins-note{font-size:11px}
+  .filters{gap:6px}
+  .fb{font-size:11px;padding:5px 14px}
+  .hdr-eyebrow{font-size:11px}
+  .hdr-sub{font-size:12px}
+  .card{padding:1.5rem}
+  .insights{margin-bottom:1.5rem}
+  .insight{padding:1.5rem}
+}
+@media(min-width:1024px){
+  .body{padding:1.5rem 3rem}
+  .hdr{padding:1.5rem 3rem}
+}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-eyebrow">Easca Consulting · Consultation Intelligence</div>
+  <div class="hdr-title">Accelerating Infrastructure: Public Consultation</div>
+  <div class="hdr-sub">Dept. of Public Expenditure, Infrastructure, Public Service Reform &amp; Digitalisation · Ireland · 2025</div>
+  <div class="hdr-bottom">
+    <div>
+      <div class="hdr-numlab">Submissions analysed</div>
+      <div class="hdr-num" id="totalNum">165</div>
+      <div class="hdr-numsub">165 total public submissions</div>
+    </div>
+    <div style="text-align:right">
+      <div class="hdr-numlab">Active filter</div>
+      <div style="font-size:11px;color:#22d3a5;font-family:'DM Mono',monospace;margin-top:2px" id="activeLabel">All submissions</div>
+    </div>
+  </div>
+</div>
+
+<div class="body">
+  <div class="stats-grid" id="statsGrid"></div>
+  <div class="filters" id="filters"></div>
+
+  <div class="charts-row">
+  <div class="card" style="margin-bottom:0">
+    <div class="card-label">Issues raised — tap to filter</div>
+    <div id="issueList"></div>
+    <div id="issueHint" class="issue-hint" style="display:none">Tap again to clear filter</div>
+  </div>
+  <div class="right-col">
+    <div class="card" style="margin-bottom:0">
+      <div class="card-label">Position distribution</div>
+      <div class="pos-wrap">
+        <svg id="donut" viewBox="0 0 100 100" style="flex-shrink:0;width:clamp(90px,10vw,130px);height:clamp(90px,10vw,130px)"></svg>
+        <div id="posLegend" style="flex:1"></div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:0;flex:1">
+      <div class="card-label">By sector — tap to filter</div>
+      <div id="sectorList"></div>
+    </div>
+  </div>
+</div>
+
+  <div class="insights">
+    <div class="insight">
+      <div class="ins-num" style="color:#f87171">3</div>
+      <div class="ins-label">organised community groups</div>
+      <div class="ins-sub">out of 166 public submissions</div>
+      <div class="ins-note">Midleton floods · S2S cycleway · homebuyers</div>
+    </div>
+    <div class="insight">
+      <div class="ins-num" style="color:#fb923c">22</div>
+      <div class="ins-label">independently raised capacity gaps</div>
+      <div class="ins-sub">Arup · Mott Mac · CIF · Engineers Ireland…</div>
+      <div class="ins-note">Not a named pillar in the Action Plan</div>
+    </div>
+    <div class="insight">
+      <div class="ins-num" style="color:#22d3a5">58</div>
+      <div class="ins-label">submissions: conditional support</div>
+      <div class="ins-sub">the largest single position group</div>
+      <div class="ins-note">TII · NTA · EirGrid · ESB · Uisce Éireann · DCC</div>
+    </div>
+  </div>
+
+  
+  <div class="card" style="margin-bottom:1rem">
+    <div class="card-label">Submissions vs Action Plan — what was addressed?</div>
+    <div style="margin-bottom:10px;font-size:10px;color:#475569;font-family:'DM Mono',monospace">30 actions across 4 pillars. Issues raised in submissions mapped to coverage.</div>
+    <div id="coverageList"></div>
+    <div style="margin-top:10px;padding-top:10px;border-top:1px solid #1e293b;font-size:10px;color:#334155;font-family:'DM Mono',monospace">
+      Source: Accelerating Infrastructure Report and Action Plan, December 2025
+    </div>
+  </div>
+<div class="tbl-card">
+    <div class="tbl-hdr">
+      <div class="tbl-hdr-label">Named respondents</div>
+      <div class="tbl-hdr-sub" id="tblCount"></div>
+    </div>
+    <div class="tbl-list" id="tblList"></div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-text">Source: gov.ie · 166 form submissions + 67 supplementary documents · Structured analysis by Easca Consulting · eascaconsulting.com</div>
+    <div class="footer-brand">EASCA</div>
+  </div>
+</div>
+
+<script>
+const ALL=[{"n":1,"org":"Anonymous organisation","type":"Organisation","sector":"Business/Industry","issues":["Planning delays","Regulatory complexity","Funding/investment","Delivery timelines"],"position":"Conditional support","summary":"Supports reform but highlights risk-return tensions in PPPs"},{"n":2,"org":"Anonymous organisation","type":"Organisation","sector":"Individual/Citizen","issues":["Agency coordination","Delivery timelines"],"position":"Conditional support","summary":"Wants unified governance body for infrastructure"},{"n":3,"org":"Anonymous organisation","type":"Organisation","sector":"Professional Services","issues":["Delivery timelines","Regulatory complexity","Agency coordination","Climate/sustainability"],"position":"Supportive","summary":"Broadly positive on reform direction, stresses long-term planning"},{"n":4,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines","Agency coordination"],"position":"Raising concerns","summary":"Frustrated by infrastructure failures affecting public services"},{"n":5,"org":"Edelman Ireland","type":"Organisation","sector":"Professional Services","issues":["Public consultation","Community engagement","Delivery timelines"],"position":"Conditional support","summary":"Supports acceleration but calls for stronger public engagement"},{"n":6,"org":"HISCo","type":"Organisation","sector":"Construction/Development","issues":["Agency coordination","Grid connections","Funding/investment","Housing delivery"],"position":"Raising concerns","summary":"No formal coordination between delivery agents; systemic gap"},{"n":7,"org":"HISCo","type":"Organisation","sector":"Construction/Development","issues":["Agency coordination","Housing delivery","Grid connections","Delivery timelines"],"position":"Raising concerns","summary":"Calls for integrated delivery model across state agencies"},{"n":8,"org":"HISCo","type":"Organisation","sector":"Construction/Development","issues":["Agency coordination","Funding/investment","Housing delivery"],"position":"Raising concerns","summary":"Follow-on submission: state agencies not working together"},{"n":9,"org":"Trifecta Ireland","type":"Organisation","sector":"Energy","issues":["Grid connections","Delivery timelines","Regulatory complexity","Legal reform"],"position":"Raising concerns","summary":"Ireland outlier in Europe for slow electricity infrastructure"},{"n":10,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Regulatory complexity","Agency coordination","Delivery timelines"],"position":"Conditional support","summary":"Right structures exist but post-2008 capacity decimated"},{"n":11,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Legal reform","Delivery timelines"],"position":"Raising concerns","summary":"Flood relief schemes blocked by ministerial consent bottleneck"},{"n":12,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines","Agency coordination"],"position":"Raising concerns","summary":"System too slow; multiple veto points causing gridlock"},{"n":13,"org":"Northern & Western Regional Assembly","type":"Organisation","sector":"Local Government","issues":["Planning delays","Delivery timelines","Funding/investment","Agency coordination"],"position":"Raising concerns","summary":"Appraisal processes too onerous; regional investment needed"},{"n":14,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"General frustration with pace of infrastructure delivery"},{"n":15,"org":"Laois County Council","type":"Organisation","sector":"Local Government","issues":["Agency coordination","Funding/investment","Planning delays","Capacity/skills"],"position":"Conditional support","summary":"Plan-led but needs better national-local coordination"},{"n":16,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Systemic delays prevent timely infrastructure delivery"},{"n":17,"org":"An Taisce","type":"Organisation","sector":"Environmental/NGO","issues":["Environmental assessment","Public consultation","Legal reform","Climate/sustainability"],"position":"Mixed","summary":"Reform welcome but must not undermine environmental safeguards"},{"n":18,"org":"COWI UK & Ireland","type":"Organisation","sector":"Professional Services","issues":["Agency coordination","Delivery timelines","Capacity/skills","Planning delays"],"position":"Conditional support","summary":"Fragmentation across departments causing delays; needs central delivery unit"},{"n":19,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Community engagement"],"position":"Raising concerns","summary":"Local infrastructure failures during storm events"},{"n":20,"org":"Wind Energy Ireland","type":"Organisation","sector":"Energy","issues":["Planning delays","Grid connections","Legal reform","Environmental assessment"],"position":"Conditional support","summary":"Detailed submission: planning and grid key barriers to renewables"},{"n":21,"org":"Dublin City Council","type":"Organisation","sector":"Local Government","issues":["Grid connections","Planning delays","Agency coordination","Housing delivery"],"position":"Conditional support","summary":"Ambitious targets undermined by grid and planning constraints"},{"n":22,"org":"Shannon Foynes Port Company","type":"Organisation","sector":"Transport","issues":["Planning delays","Funding/investment","Delivery timelines","Regulatory complexity"],"position":"Conditional support","summary":"Port infrastructure adequate historically but reform needed"},{"n":23,"org":"National Transport Authority","type":"Organisation","sector":"Transport","issues":["Planning delays","Agency coordination","Delivery timelines","Land/CPO"],"position":"Conditional support","summary":"Detailed NTA submission attached; systemic reform required"},{"n":24,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"System too slow across all infrastructure types"},{"n":25,"org":"Transport Infrastructure Ireland","type":"Organisation","sector":"Transport","issues":["Planning delays","Legal reform","Land/CPO","Delivery timelines"],"position":"Raising concerns","summary":"Delivery increasingly difficult; TII notes rising complexity"},{"n":26,"org":"Cloud Infrastructure Ireland","type":"Organisation","sector":"Business/Industry","issues":["Grid connections","Planning delays","Regulatory complexity","Delivery timelines"],"position":"Raising concerns","summary":"Data centre sector blocked by grid and planning constraints"},{"n":27,"org":"Bord Gáis Energy","type":"Organisation","sector":"Energy","issues":["Regulatory complexity","Agency coordination","Planning delays","Funding/investment"],"position":"Conditional support","summary":"Lacks integrated holistic planning framework for networks"},{"n":28,"org":"Anonymous organisation","type":"Organisation","sector":"Individual/Citizen","issues":["Delivery timelines"],"position":"Raising concerns","summary":"Empty or minimal submission"},{"n":29,"org":"Mayo County Council","type":"Organisation","sector":"Local Government","issues":["Agency coordination","Funding/investment","Planning delays","Delivery timelines"],"position":"Conditional support","summary":"Coordinated strategic planning needed; regions underserved"},{"n":30,"org":"Anonymous organisation","type":"Organisation","sector":"Individual/Citizen","issues":["Delivery timelines"],"position":"Raising concerns","summary":"Minimal submission"},{"n":31,"org":"Turner & Townsend","type":"Organisation","sector":"Professional Services","issues":["Planning delays","Capacity/skills","Procurement","Delivery timelines"],"position":"Conditional support","summary":"Successive governments failed to deliver; systemic reform needed"},{"n":32,"org":"Turner & Townsend","type":"Organisation","sector":"Professional Services","issues":["Planning delays","Capacity/skills","Procurement","Delivery timelines"],"position":"Conditional support","summary":"Duplicate submission; same key concerns"},{"n":33,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Infrastructure delays harming communities"},{"n":34,"org":"Individual (Engineer, Local Gov)","type":"Individual","sector":"Individual/Citizen","issues":["Capacity/skills","Planning delays","Agency coordination","Procurement"],"position":"Raising concerns","summary":"25 years experience: capacity and coordination are the core problem"},{"n":35,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Delivery too slow across all sectors"},{"n":36,"org":"ULI Ireland","type":"Organisation","sector":"Business/Industry","issues":["Regulatory complexity","Funding/investment","Investor confidence","Delivery timelines"],"position":"Conditional support","summary":"Competitiveness at risk; reform urgent but must be balanced"},{"n":37,"org":"Jacobs Ireland","type":"Organisation","sector":"Professional Services","issues":["Planning delays","Capacity/skills","Procurement","Delivery timelines"],"position":"Conditional support","summary":"Full response attached; planning and capacity key barriers"},{"n":38,"org":"CIEEM","type":"Organisation","sector":"Environmental/NGO","issues":["Environmental assessment","Public consultation","Climate/sustainability","Legal reform"],"position":"Mixed","summary":"Reform must not compromise ecological and environmental standards"},{"n":39,"org":"Art Data Centres","type":"Organisation","sector":"Business/Industry","issues":["Grid connections","Regulatory complexity","Delivery timelines"],"position":"Raising concerns","summary":"Fibre, gas, electricity infrastructure delays since 2017"},{"n":40,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Infrastructure delays unacceptable"},{"n":41,"org":"Chambers Ireland","type":"Organisation","sector":"Business/Industry","issues":["Planning delays","Regulatory complexity","Delivery timelines","Investor confidence"],"position":"Conditional support","summary":"Full submission attached; urgent reform needed for competitiveness"},{"n":42,"org":"Anonymous organisation","type":"Organisation","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines","Agency coordination"],"position":"Raising concerns","summary":"Systemic barriers preventing delivery"},{"n":43,"org":"Anonymous organisation","type":"Organisation","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Delivery system needs reform"},{"n":44,"org":"Bremore Ireland Port","type":"Organisation","sector":"Transport","issues":["Planning delays","Land/CPO","Funding/investment","Delivery timelines"],"position":"Conditional support","summary":"Port development blocked by planning and land access issues"},{"n":45,"org":"Keeper Solutions","type":"Organisation","sector":"Professional Services","issues":["Planning delays","Regulatory complexity","Delivery timelines","Capacity/skills"],"position":"Conditional support","summary":"Ambitious plans held back by complex rules and limited capacity"},{"n":46,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Delivery too slow"},{"n":47,"org":"Cairn Homes PLC","type":"Organisation","sector":"Construction/Development","issues":["Housing delivery","Grid connections","Planning delays","Funding/investment"],"position":"Raising concerns","summary":"Severe infrastructure shortage directly blocking housing"},{"n":48,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"General frustration with system"},{"n":49,"org":"LDA","type":"Organisation","sector":"Construction/Development","issues":["Agency coordination","Housing delivery","Planning delays","Funding/investment"],"position":"Conditional support","summary":"Fragmented process; LDA calls for integrated delivery model"},{"n":50,"org":"Irish Planning Institute","type":"Organisation","sector":"Professional Services","issues":["Planning delays","Agency coordination","Public consultation","Regulatory complexity"],"position":"Conditional support","summary":"Land use and infrastructure planning treated as separate; must integrate"},{"n":51,"org":"Society of Chartered Surveyors Ireland","type":"Organisation","sector":"Professional Services","issues":["Regulatory complexity","Planning delays","Procurement","Delivery timelines"],"position":"Conditional support","summary":"Systemic inefficiencies; SCSI calls for streamlined processes"},{"n":52,"org":"Statkraft","type":"Organisation","sector":"Energy","issues":["Planning delays","Grid connections","Investor confidence","Regulatory complexity"],"position":"Raising concerns","summary":"Lack of investment over 20 years; renewed focus welcome but insufficient"},{"n":53,"org":"Property Industry Ireland","type":"Organisation","sector":"Construction/Development","issues":["Planning delays","Housing delivery","Regulatory complexity","Agency coordination"],"position":"Conditional support","summary":"Ireland can do better; PII calls for streamlined delivery"},{"n":54,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Legal reform","Regulatory complexity"],"position":"Raising concerns","summary":"Compares badly with EU; NIMBY and planning cited as top barriers"},{"n":55,"org":"Docklands Business Forum","type":"Organisation","sector":"Business/Industry","issues":["Agency coordination","Planning delays","Delivery timelines","Grid connections"],"position":"Raising concerns","summary":"Inconsistent, slow, no strategic coordination"},{"n":56,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Agency coordination","Regulatory complexity","Delivery timelines"],"position":"Raising concerns","summary":"Too many quangos with effective veto powers"},{"n":57,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"System fundamentally broken"},{"n":58,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Infrastructure delays affecting quality of life"},{"n":59,"org":"Anonymous organisation","type":"Organisation","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Systemic barriers preventing delivery"},{"n":60,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines","Regulatory complexity"],"position":"Raising concerns","summary":"Too slow; reform urgently needed"},{"n":61,"org":"City & County Management Association","type":"Organisation","sector":"Local Government","issues":["Agency coordination","Funding/investment","Capacity/skills","Planning delays"],"position":"Conditional support","summary":"CCMA: local government under-resourced; coordination critical"},{"n":62,"org":"Office of the Planning Regulator","type":"Organisation","sector":"Local Government","issues":["Planning delays","Regulatory complexity","Agency coordination","Public consultation"],"position":"Conditional support","summary":"OPR: capacity exists but system needs streamlining"},{"n":63,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Delays harming citizens"},{"n":64,"org":"VISION Consulting","type":"Organisation","sector":"Professional Services","issues":["Agency coordination","Public consultation","Delivery timelines","Regulatory complexity"],"position":"Raising concerns","summary":"Fragmented and adversarial; stakeholders treated as competitors"},{"n":65,"org":"Anonymous organisation","type":"Organisation","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Systemic reform needed"},{"n":66,"org":"Green Party","type":"Organisation","sector":"Other","issues":["Climate/sustainability","Planning delays","Public consultation","Environmental assessment"],"position":"Mixed","summary":"Supports acceleration but must align with climate commitments"},{"n":67,"org":"Castlethorn","type":"Organisation","sector":"Construction/Development","issues":["Planning delays","Housing delivery","Funding/investment","Regulatory complexity"],"position":"Conditional support","summary":"State had strong delivery record; planning reform essential now"},{"n":68,"org":"John Laing","type":"Organisation","sector":"Business/Industry","issues":["Funding/investment","Procurement","Investor confidence","Delivery timelines"],"position":"Supportive","summary":"Strategic clarity present; private investment can accelerate delivery"},{"n":69,"org":"AMBER Centre","type":"Organisation","sector":"Academia","issues":["Capacity/skills","Regulatory complexity","Agency coordination","Climate/sustainability"],"position":"Conditional support","summary":"Research perspective: capacity and skills fundamental bottleneck"},{"n":70,"org":"Sligo County Council","type":"Organisation","sector":"Local Government","issues":["Funding/investment","Agency coordination","Planning delays","Delivery timelines"],"position":"Conditional support","summary":"Regional neglect; calls for better national-local funding"},{"n":71,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Infrastructure failures affecting daily life"},{"n":72,"org":"Individual (Active Travel)","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Public consultation","Community engagement","Transport"],"position":"Conditional support","summary":"Active travel schemes delayed; submission focused on cycling"},{"n":73,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"System too slow"},{"n":74,"org":"daa plc","type":"Organisation","sector":"Transport","issues":["Planning delays","Land/CPO","Regulatory complexity","Delivery timelines"],"position":"Conditional support","summary":"Airport infrastructure reform needed; full submission attached"},{"n":75,"org":"Iarnród Éireann","type":"Organisation","sector":"Transport","issues":["Planning delays","Funding/investment","Land/CPO","Delivery timelines"],"position":"Raising concerns","summary":"Rail not at required pace or scale; systemic reform essential"},{"n":76,"org":"Northwest Regional Enterprise Plan","type":"Organisation","sector":"Local Government","issues":["Funding/investment","Agency coordination","Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Northwest severely underserved; regional balance needed"},{"n":77,"org":"Uisce Éireann","type":"Organisation","sector":"Water/Utilities","issues":["Regulatory complexity","Funding/investment","Agency coordination","Planning delays"],"position":"Conditional support","summary":"Complex oversight and controls; regulatory reform needed"},{"n":78,"org":"Gaïa ecotecture","type":"Organisation","sector":"Environmental/NGO","issues":["Public consultation","Environmental assessment","Community engagement","Climate/sustainability"],"position":"Opposed","summary":"Developer-led monoculture; communities and environment excluded"},{"n":79,"org":"Irish Cycling Campaign","type":"Organisation","sector":"Transport","issues":["Planning delays","Public consultation","Community engagement","Agency coordination"],"position":"Conditional support","summary":"Central planning helps but active travel neglected"},{"n":80,"org":"Offshore Wind Consortium","type":"Organisation","sector":"Energy","issues":["Grid connections","Planning delays","Regulatory complexity","Investor confidence"],"position":"Conditional support","summary":"Combined response from 5 offshore wind projects; grid critical barrier"},{"n":81,"org":"Health Service Executive","type":"Organisation","sector":"Other","issues":["Planning delays","Agency coordination","Regulatory complexity","Delivery timelines"],"position":"Raising concerns","summary":"Too slow and too uncertain; HSE capital projects severely delayed"},{"n":82,"org":"Friends of the Irish Environment","type":"Organisation","sector":"Environmental/NGO","issues":["Environmental assessment","Public consultation","Legal reform","Climate/sustainability"],"position":"Opposed","summary":"Acceleration must not bypass environmental safeguards"},{"n":83,"org":"KPMG Ireland","type":"Organisation","sector":"Professional Services","issues":["Agency coordination","Delivery timelines","Regulatory complexity","Capacity/skills"],"position":"Conditional support","summary":"Lost our way; structure and prioritisation must be restored"},{"n":84,"org":"Equitix","type":"Organisation","sector":"Business/Industry","issues":["Funding/investment","Investor confidence","Procurement","Regulatory complexity"],"position":"Supportive","summary":"NDP foundation strong; private capital ready if barriers removed"},{"n":85,"org":"ESB (Generation & Trading)","type":"Organisation","sector":"Energy","issues":["Grid connections","Planning delays","Regulatory complexity","Climate/sustainability"],"position":"Conditional support","summary":"Energy focus; planning and grid critical for net zero"},{"n":86,"org":"Anonymous organisation","type":"Organisation","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Systemic barriers"},{"n":87,"org":"Local Authority Waters Programme","type":"Organisation","sector":"Water/Utilities","issues":["Agency coordination","Environmental assessment","Funding/investment","Planning delays"],"position":"Conditional support","summary":"Project-by-project delivery misses programme-level opportunities"},{"n":88,"org":"Clancourt","type":"Organisation","sector":"Construction/Development","issues":["Housing delivery","Grid connections","Funding/investment","Planning delays"],"position":"Conditional support","summary":"Private delivery model can help if barriers removed"},{"n":89,"org":"ESB Networks","type":"Organisation","sector":"Energy","issues":["Grid connections","Regulatory complexity","Funding/investment","Delivery timelines"],"position":"Conditional support","summary":"Full submission attached; grid investment and reform critical"},{"n":90,"org":"EDF Renewables Ireland","type":"Organisation","sector":"Energy","issues":["Planning delays","Grid connections","Delivery timelines","Regulatory complexity"],"position":"Raising concerns","summary":"Ireland slowest in Europe for electricity project lifecycles"},{"n":91,"org":"Southern Regional Assembly","type":"Organisation","sector":"Local Government","issues":["Agency coordination","Funding/investment","Planning delays","Delivery timelines"],"position":"Conditional support","summary":"Must align with Project Ireland 2040; regional priorities matter"},{"n":92,"org":"Individual (Finance)","type":"Individual","sector":"Individual/Citizen","issues":["Procurement","Agency coordination","Capacity/skills","Delivery timelines"],"position":"Raising concerns","summary":"Government/semi-state failures in contract management"},{"n":93,"org":"Telecommunications Industry Ireland","type":"Organisation","sector":"Business/Industry","issues":["Planning delays","Regulatory complexity","Grid connections","Delivery timelines"],"position":"Conditional support","summary":"Telecoms omitted from scope; should be designated strategic infrastructure"},{"n":94,"org":"BnM","type":"Organisation","sector":"Construction/Development","issues":["Planning delays","Funding/investment","Delivery timelines","Housing delivery"],"position":"Conditional support","summary":"Growth welcome; planning reform essential to keep pace"},{"n":95,"org":"Northwest Regional Enterprise Plan","type":"Organisation","sector":"Local Government","issues":["Funding/investment","Delivery timelines","Agency coordination","Planning delays"],"position":"Raising concerns","summary":"Northwest underserved; duplicate submission"},{"n":96,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines"],"position":"Raising concerns","summary":"Minimal submission"},{"n":97,"org":"Anonymous organisation","type":"Organisation","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Systemic barriers"},{"n":98,"org":"Anonymous organisation","type":"Organisation","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Systemic reform needed"},{"n":99,"org":"BAM Ireland","type":"Organisation","sector":"Construction/Development","issues":["Planning delays","Procurement","Capacity/skills","Delivery timelines"],"position":"Conditional support","summary":"Strategic intent improved but practical delivery hindered by complexity"},{"n":100,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Agency coordination","Regulatory complexity","Delivery timelines"],"position":"Raising concerns","summary":"Too many quangos with no sense of urgency; leadership failures"},{"n":101,"org":"Arup","type":"Organisation","sector":"Professional Services","issues":["Planning delays","Delivery timelines","Capacity/skills","Agency coordination"],"position":"Conditional support","summary":"Infrastructure deficit growing; competitiveness at stake"},{"n":102,"org":"Towercom","type":"Organisation","sector":"Business/Industry","issues":["Regulatory complexity","Planning delays","Delivery timelines","Grid connections"],"position":"Conditional support","summary":"Telecoms infrastructure requires proportionate treatment"},{"n":103,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Delivery system too slow"},{"n":104,"org":"Individual (Construction)","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Capacity/skills","Delivery timelines"],"position":"Conditional support","summary":"Ireland delivers well once started; getting started is the problem"},{"n":105,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Environmental assessment","Planning delays","Legal reform"],"position":"Raising concerns","summary":"EIAR process excessive; up to 7500 pages for wind farms"},{"n":106,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Legal reform","Procurement","Regulatory complexity","Delivery timelines"],"position":"Raising concerns","summary":"Legislative fettering and poor risk allocation key barriers"},{"n":107,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Agency coordination","Planning delays","Delivery timelines"],"position":"Conditional support","summary":"Needs more coordinated national planning for linear infrastructure"},{"n":108,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Systemic delays"},{"n":109,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Legal reform","Public consultation","Environmental assessment","Planning delays"],"position":"Mixed","summary":"System created to protect rights has become barrier to delivery"},{"n":110,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Housing delivery","Regulatory complexity","Delivery timelines"],"position":"Raising concerns","summary":"Infrastructure deficit: housing, competitiveness, quality of life"},{"n":111,"org":"Individual (Planner)","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Capacity/skills","Legal reform","Regulatory complexity"],"position":"Raising concerns","summary":"Planning system focus; over-litigated over last 10-15 years"},{"n":112,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Delivery barriers across all sectors"},{"n":113,"org":"Cork Chamber","type":"Organisation","sector":"Business/Industry","issues":["Planning delays","Delivery timelines","Investor confidence","Agency coordination"],"position":"Raising concerns","summary":"Large projects take far longer in Ireland than comparable countries"},{"n":114,"org":"FuturEnergy Ireland","type":"Organisation","sector":"Energy","issues":["Planning delays","Legal reform","Environmental assessment","Delivery timelines"],"position":"Raising concerns","summary":"Delivery extremely slow; permitting timelines and legal challenges"},{"n":115,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Environmental assessment","Planning delays","Legal reform"],"position":"Raising concerns","summary":"EIAR process absurdly long for wind farms"},{"n":116,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Legal reform","Delivery timelines"],"position":"Raising concerns","summary":"Large critical projects take far too long"},{"n":117,"org":"Midleton & East Cork Flood Group","type":"Organisation","sector":"Community/Residents","issues":["Delivery timelines","Funding/investment","Agency coordination","Planning delays"],"position":"Raising concerns","summary":"Flood relief delayed for years; community urgently affected"},{"n":118,"org":"Cork City Council","type":"Organisation","sector":"Local Government","issues":["Agency coordination","Planning delays","Funding/investment","Delivery timelines"],"position":"Conditional support","summary":"Full submission attached; coordination and funding key"},{"n":119,"org":"Ecocem Ireland","type":"Organisation","sector":"Construction/Development","issues":["Planning delays","Delivery timelines","Climate/sustainability","Regulatory complexity"],"position":"Conditional support","summary":"Significant deficit after decade of under-investment"},{"n":120,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines","Agency coordination"],"position":"Raising concerns","summary":"Too many barriers; cites Shannon crossing as example"},{"n":121,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Very poor; long-term planning without delivery"},{"n":122,"org":"Flotation Energy","type":"Organisation","sector":"Energy","issues":["Grid connections","Planning delays","Regulatory complexity","Investor confidence"],"position":"Raising concerns","summary":"Offshore energy blocked by grid and planning constraints"},{"n":123,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Delivery system fundamentally broken"},{"n":124,"org":"Irish Climate Science Forum","type":"Organisation","sector":"Environmental/NGO","issues":["Climate/sustainability","Regulatory complexity","Environmental assessment","Planning delays"],"position":"Mixed","summary":"Concerned infrastructure driven by green ideology over engineering"},{"n":125,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Environmental assessment","Legal reform","Planning delays"],"position":"Raising concerns","summary":"Environmental process disproportionate"},{"n":126,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Systemic barriers"},{"n":127,"org":"S2S Sutton to Sandycove","type":"Organisation","sector":"Community/Residents","issues":["Agency coordination","Planning delays","Public consultation","Community engagement"],"position":"Conditional support","summary":"Cycleway blocked by coordination failures between multiple bodies"},{"n":128,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Infrastructure too slow"},{"n":129,"org":"SSE","type":"Organisation","sector":"Energy","issues":["Grid connections","Planning delays","Legal reform","Regulatory complexity"],"position":"Conditional support","summary":"Full submission attached; energy delivery barriers critical"},{"n":130,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Funding/investment","Agency coordination","Delivery timelines"],"position":"Raising concerns","summary":"Government Dublin-centric; sporadic and reactive"},{"n":131,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Barriers preventing delivery"},{"n":132,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Funding/investment","Capacity/skills"],"position":"Raising concerns","summary":"Incredibly slow, over budget, poor accountability"},{"n":133,"org":"(Anonymous Dev)","type":"Organisation","sector":"Energy","issues":["Planning delays","Capacity/skills","Regulatory complexity","Delivery timelines"],"position":"Raising concerns","summary":"Planning biggest barrier; resourcing bodies critical"},{"n":135,"org":"Eastern & Midland Regional Assembly","type":"Organisation","sector":"Local Government","issues":["Agency coordination","Funding/investment","Planning delays","Delivery timelines"],"position":"Conditional support","summary":"Full submission attached; regional coordination needed"},{"n":136,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Clear delays at all planning stages"},{"n":137,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Systemic barriers"},{"n":138,"org":"Blue Dot Consulting","type":"Organisation","sector":"Professional Services","issues":["Climate/sustainability","Planning delays","Regulatory complexity","Delivery timelines"],"position":"Conditional support","summary":"Energy transition commitments undermined by delivery barriers"},{"n":139,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Systemic reform needed"},{"n":140,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Regulatory complexity","Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Too slow; blocked by red tape"},{"n":141,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays","Agency coordination"],"position":"Raising concerns","summary":"Very poor delivery; systemic failure"},{"n":142,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Barriers across all sectors"},{"n":143,"org":"Individual (Finance)","type":"Individual","sector":"Individual/Citizen","issues":["Funding/investment","Procurement","Investor confidence","Regulatory complexity"],"position":"Conditional support","summary":"Infrastructure finance background; urges private capital models"},{"n":144,"org":"American Chamber of Commerce","type":"Organisation","sector":"Business/Industry","issues":["Grid connections","Planning delays","Investor confidence","Regulatory complexity"],"position":"Raising concerns","summary":"FDI at risk; grid and planning blocking US investment"},{"n":145,"org":"Galway Harbour Company","type":"Organisation","sector":"Transport","issues":["Planning delays","Funding/investment","Land/CPO","Delivery timelines"],"position":"Raising concerns","summary":"Unsuccessful except motorways; systemic reform essential"},{"n":146,"org":"University College Cork","type":"Organisation","sector":"Academia","issues":["Capacity/skills","Agency coordination","Climate/sustainability","Planning delays"],"position":"Conditional support","summary":"Academic perspective; skills and coordination key constraints"},{"n":147,"org":"Individual (Procurement)","type":"Individual","sector":"Individual/Citizen","issues":["Procurement","Capacity/skills","Agency coordination","Delivery timelines"],"position":"Raising concerns","summary":"State agency procurement and project management failures"},{"n":148,"org":"Mott MacDonald","type":"Organisation","sector":"Professional Services","issues":["Planning delays","Delivery timelines","Capacity/skills","Procurement"],"position":"Conditional support","summary":"Projects too long due to multiple barriers; cost inflation rising"},{"n":149,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Housing delivery","Delivery timelines"],"position":"Raising concerns","summary":"Planning timescales having significant housing impact"},{"n":150,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Barriers across all sectors"},{"n":151,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Infrastructure delivery failing"},{"n":152,"org":"ECO Wind Cluster","type":"Organisation","sector":"Energy","issues":["Grid connections","Planning delays","Regulatory complexity","Investor confidence"],"position":"Conditional support","summary":"East coast offshore wind; grid and planning critical barriers"},{"n":153,"org":"Homebuyer's Hero","type":"Organisation","sector":"Community/Residents","issues":["Housing delivery","Planning delays","Funding/investment","Delivery timelines"],"position":"Raising concerns","summary":"Failing; must define infrastructure as national priority"},{"n":154,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Funding/investment"],"position":"Raising concerns","summary":"Midleton flood relief urgently needed; delay after delay"},{"n":155,"org":"Irish Climate Science Forum","type":"Organisation","sector":"Environmental/NGO","issues":["Climate/sustainability","Regulatory complexity","Planning delays","Environmental assessment"],"position":"Mixed","summary":"Lacks rational objectives since financial crash"},{"n":156,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines","Capacity/skills"],"position":"Conditional support","summary":"Deliver excellent infrastructure once started; starting is problem"},{"n":157,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"System barriers"},{"n":158,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Capacity/skills","Agency coordination","Regulatory complexity"],"position":"Raising concerns","summary":"Civil servants not up to tasks compared to EU peers"},{"n":159,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Environmental assessment","Planning delays","Climate/sustainability"],"position":"Mixed","summary":"Disappointed energy and water inefficiencies not addressed"},{"n":160,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Delivery barriers unacceptable"},{"n":161,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Housing delivery","Agency coordination","Planning delays"],"position":"Raising concerns","summary":"Infrastructure must precede development, not follow it"},{"n":162,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Systemic barriers"},{"n":163,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Regulatory complexity","Agency coordination","Delivery timelines"],"position":"Conditional support","summary":"Improved recently but excessive timelines and fragmented governance"},{"n":164,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Barriers across all infrastructure types"},{"n":165,"org":"Anonymous organisation","type":"Organisation","sector":"Individual/Citizen","issues":["Public consultation","Community engagement","Planning delays"],"position":"Mixed","summary":"Public challenge when not in personal interest"},{"n":166,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Infrastructure delivery failing"}];
+
+const SCOL={Energy:"#22d3a5",Transport:"#60a5fa","Local Government":"#a78bfa","Professional Services":"#fb923c","Construction/Development":"#f472b6","Business/Industry":"#38bdf8","Environmental/NGO":"#86efac","Community/Residents":"#fde68a","Water/Utilities":"#67e8f9",Academia:"#d1d5db","Individual/Citizen":"#6b7280"};
+const PCOL={Supportive:"#22d3a5","Conditional support":"#fb923c",Mixed:"#94a3b8","Raising concerns":"#f87171",Opposed:"#ef4444"};
+const SECTORS=["Energy","Transport","Local Government","Professional Services","Construction/Development","Business/Industry","Environmental/NGO","Community/Residents","Water/Utilities","Academia","Individual/Citizen"];
+const POSITIONS=["Raising concerns","Conditional support","Mixed","Supportive","Opposed"];
+const ISSUES=["Planning delays","Delivery timelines","Agency coordination","Regulatory complexity","Funding/investment","Capacity/skills","Grid connections","Legal reform","Environmental assessment","Climate/sustainability","Public consultation","Housing delivery","Procurement","Investor confidence","Community engagement"];
+
+let activeFilter='all';
+let activeIssue=null;
+
+
+const COVERAGE=[
+  {issue:"Planning delays",count:131,covered:true,pillar:"Regulatory Reform",note:"Actions 8, 16, 23"},
+  {issue:"Delivery timelines",count:117,covered:true,pillar:"Delivery & Coordination",note:"Actions 17–24"},
+  {issue:"Agency coordination",count:52,covered:true,pillar:"Delivery & Coordination",note:"Actions 19, 21"},
+  {issue:"Regulatory complexity",count:50,covered:true,pillar:"Regulatory Reform",note:"Actions 9–16"},
+  {issue:"Funding/investment",count:35,covered:true,pillar:"Delivery & Coordination",note:"Actions 17, 18"},
+  {issue:"Capacity/skills",count:22,covered:false,pillar:null,note:"Not a named pillar or action"},
+  {issue:"Grid connections",count:21,covered:false,pillar:null,note:"Not directly addressed"},
+  {issue:"Legal reform",count:17,covered:true,pillar:"Legal Reform",note:"Actions 1–7"},
+  {issue:"Environmental assessment",count:15,covered:true,pillar:"Legal Reform",note:"Action 4"},
+  {issue:"Climate/sustainability",count:14,covered:false,pillar:null,note:"Not a named pillar"},
+  {issue:"Housing delivery",count:14,covered:false,pillar:null,note:"Not directly actioned"},
+  {issue:"Public consultation",count:14,covered:true,pillar:"Public Acceptance",note:"Actions 28, 29"},
+  {issue:"Procurement",count:13,covered:true,pillar:"Delivery & Coordination",note:"Action 25"},
+  {issue:"Investor confidence",count:11,covered:true,pillar:"Delivery & Coordination",note:"Actions 17, 18, 20"},
+];
+
+function renderCoverage(){
+  document.getElementById('coverageList').innerHTML=COVERAGE.map(c=>`
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:7px">
+      <div style="flex:0 0 130px;font-size:10px;color:${c.covered?'#94a3b8':'#e2e8f0'};font-family:'DM Mono',monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${c.issue}</div>
+      <div style="flex:0 0 7px;height:7px;border-radius:50%;background:${c.covered?'#334155':'#f87171'};flex-shrink:0"></div>
+      <div style="flex:1;font-size:10px;color:${c.covered?'#334155':'#fb923c'};font-family:'DM Mono',monospace">${c.covered?c.pillar:'Not addressed in Action Plan'}</div>
+      <div style="flex:0 0 24px;text-align:right;font-size:10px;color:${c.covered?'#334155':'#f87171'};font-family:'DM Mono',monospace">${c.count}</div>
+    </div>`).join('');
+}
+
+function getFiltered(){
+  return ALL.filter(r=>{
+    if(activeFilter==='Organisation'&&r.type!=='Organisation') return false;
+    if(activeFilter==='Individual'&&r.type!=='Individual') return false;
+    if(SECTORS.includes(activeFilter)&&r.sector!==activeFilter) return false;
+    if(activeIssue&&!r.issues.includes(activeIssue)) return false;
+    return true;
+  });
+}
+
+function render(){
+  const d=getFiltered();
+  const total=d.length;
+  document.getElementById('totalNum').textContent=total;
+
+  // Active label
+  let lab='All submissions';
+  if(activeFilter!=='all') lab=activeFilter;
+  if(activeIssue) lab=(activeFilter!=='all'?activeFilter+' · ':'')+activeIssue;
+  document.getElementById('activeLabel').textContent=lab;
+
+  const posCounts={};
+  POSITIONS.forEach(p=>posCounts[p]=0);
+  d.forEach(r=>{posCounts[r.position]=(posCounts[r.position]||0)+1});
+
+  const secCounts={};
+  d.forEach(r=>{secCounts[r.sector]=(secCounts[r.sector]||0)+1});
+
+  const issCounts={};
+  d.forEach(r=>r.issues.forEach(i=>{issCounts[i]=(issCounts[i]||0)+1}));
+  const maxIss=Math.max(...Object.values(issCounts),1);
+
+  // Stats
+  document.getElementById('statsGrid').innerHTML=[
+    {label:"Raising concerns",val:posCounts["Raising concerns"]||0,col:"#f87171"},
+    {label:"Conditional support",val:posCounts["Conditional support"]||0,col:"#fb923c"},
+    {label:"Mixed",val:posCounts["Mixed"]||0,col:"#94a3b8"},
+    {label:"Supportive",val:posCounts["Supportive"]||0,col:"#22d3a5"},
+  ].map(s=>`<div class="stat"><div class="stat-label">${s.label}</div><div class="stat-val" style="color:${s.col}">${s.val}</div><div class="stat-sub">${Math.round(s.val/total*100)}%</div></div>`).join('');
+
+  // Filters
+  const fOpts=['all','Organisation','Individual',...SECTORS.filter(s=>(secCounts[s]||activeFilter===s)&&s!=='Individual/Citizen')];
+  document.getElementById('filters').innerHTML=fOpts.map((f,i)=>`<button class="fb${activeFilter===f?' on':''}" data-val="${encodeURIComponent(f)}">${f==='all'?'All':f.replace('/Citizen','').replace('/NGO','').replace('/Development','').replace('/Industry','')}</button>`).join('');
+  document.getElementById('filters').querySelectorAll('button').forEach(btn=>{btn.onclick=()=>setFilter(decodeURIComponent(btn.dataset.val));});
+
+  // Issues
+  const sortedIss=ISSUES.filter(i=>issCounts[i]).sort((a,b)=>(issCounts[b]||0)-(issCounts[a]||0));
+  const issHtml=sortedIss.map((iss,i)=>{
+    const cnt=issCounts[iss]||0;
+    const pct=cnt/maxIss*100;
+    const act=activeIssue===iss;
+    return `<div class="irow" data-issue="${encodeURIComponent(iss)}">
+      <div class="ilabel${act?' act':''}">${iss}</div>
+      <div class="itrack"><div class="ibar" style="width:${pct}%;background:${act?'#22d3a5':'#334155'}"></div></div>
+      <div class="ict${act?' act':''}">${cnt}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('issueList').innerHTML=issHtml;
+  document.getElementById('issueList').querySelectorAll('.irow').forEach(row=>{row.onclick=()=>setIssue(decodeURIComponent(row.dataset.issue));});
+  document.getElementById('issueHint').style.display=activeIssue?'block':'none';
+
+  // Donut
+  const svg=document.getElementById('donut');
+  const cx=50,cy=50,r=38,ir=24;
+  let angle=-Math.PI/2;
+  let paths='';
+  POSITIONS.filter(p=>posCounts[p]).forEach(p=>{
+    const pct=posCounts[p]/total;
+    const s=angle;
+    angle+=pct*2*Math.PI;
+    const e=angle;
+    const x1=cx+r*Math.cos(s),y1=cy+r*Math.sin(s);
+    const x2=cx+r*Math.cos(e),y2=cy+r*Math.sin(e);
+    const ix1=cx+ir*Math.cos(s),iy1=cy+ir*Math.sin(s);
+    const ix2=cx+ir*Math.cos(e),iy2=cy+ir*Math.sin(e);
+    const lg=(e-s)>Math.PI?1:0;
+    paths+=`<path d="M ${ix1} ${iy1} A ${ir} ${ir} 0 ${lg} 1 ${ix2} ${iy2} L ${x2} ${y2} A ${r} ${r} 0 ${lg} 0 ${x1} ${y1} Z" fill="${PCOL[p]}" opacity="0.85"/>`;
+  });
+  svg.innerHTML=paths+`<circle cx="${cx}" cy="${cy}" r="14" fill="#0f172a"/><text x="${cx}" y="${cy-1}" text-anchor="middle" font-size="9" fill="#f8fafc" font-family="DM Sans" font-weight="500">${total}</text><text x="${cx}" y="${cy+8}" text-anchor="middle" font-size="6" fill="#475569" font-family="DM Mono">total</text>`;
+
+  // Pos legend
+  document.getElementById('posLegend').innerHTML=POSITIONS.filter(p=>posCounts[p]).map(p=>`
+    <div class="prow"><div class="pdot-wrap"><div class="pdot" style="background:${PCOL[p]}"></div><span class="plabel">${p}</span></div><span class="pcount" style="color:${PCOL[p]}">${posCounts[p]}</span></div>`).join('');
+
+  // Sector list
+  const secSorted=SECTORS.filter(s=>secCounts[s]).sort((a,b)=>(secCounts[b]||0)-(secCounts[a]||0));
+  const maxSec=Math.max(...secSorted.map(s=>secCounts[s]||0),1);
+  document.getElementById('sectorList').innerHTML=secSorted.map((s,i)=>`
+    <div class="srow" data-sec="${encodeURIComponent(s)}">
+      <div class="sdot" style="background:${SCOL[s]}"></div>
+      <div class="slabel${activeFilter===s?' act':''}">${s.replace('/Citizen','').replace('/NGO','').replace('/Development','').replace('/Industry','')}</div>
+      <div class="scount" style="color:${activeFilter===s?SCOL[s]:'#334155'}">${secCounts[s]||0}</div>
+      <div class="sbar-wrap"><div class="sbar" style="width:${(secCounts[s]||0)/maxSec*100}%;background:${SCOL[s]}"></div></div>
+    </div>`).join('');
+
+  // Table - card list for mobile
+  const named=d.filter(r=>r.org!=='Individual respondent'&&r.org!=='Anonymous organisation');
+  document.getElementById('tblCount').textContent=`${named.length} named orgs in view`;
+  renderCoverage();
+  document.getElementById('tblList').innerHTML=named.map(r=>`
+    <div class="tbl-item">
+      <div class="tbl-org">${r.org}</div>
+      <div class="tbl-meta">
+        <span class="badge" style="background:${SCOL[r.sector]}18;color:${SCOL[r.sector]}">${r.sector.replace('/Citizen','').replace('/NGO','').replace('/Development','').replace('/Industry','')}</span>
+        <span class="badge" style="background:${PCOL[r.position]}18;color:${PCOL[r.position]}">${r.position}</span>
+        <span style="font-size:10px;color:#475569;font-family:'DM Mono',monospace">${r.issues[0]}</span>
+      </div>
+      <div class="tbl-summary">${r.summary}</div>
+    </div>`).join('');
+  document.getElementById('sectorList').querySelectorAll('.srow').forEach(row=>{row.onclick=()=>setFilter(decodeURIComponent(row.dataset.sec));});
+}
+function setFilter(f){activeFilter=activeFilter===f&&f!=='all'?'all':f;render();}
+function setIssue(i){activeIssue=activeIssue===i?null:i;render();}
+
+render();
+</script>
+</body>
+</html>
