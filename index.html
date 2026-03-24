@@ -4,109 +4,170 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Consultation Intelligence: Accelerating Infrastructure · Easca Consulting</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+:root{
+  --bg:#07090f;
+  --s1:#0b0f1a;
+  --s2:#0f1420;
+  --b1:#16202e;
+  --b2:#1d2b3a;
+  --teal:#1de9b6;
+  --teal-glow:rgba(29,233,182,0.12);
+  --red:#ff5c5c;
+  --red-glow:rgba(255,92,92,0.1);
+  --blue:#4d9fff;
+  --t1:#e8eef8;
+  --t2:#5a7a96;
+  --t3:#2a3d52;
+  --t4:#141e2a;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#080c14;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif;font-size:14px;line-height:1.5;min-width:320px}
+body{background:var(--bg);color:var(--t1);font-family:'DM Sans',system-ui,sans-serif;font-size:14px;line-height:1.5;min-width:320px}
 
 /* HEADER */
-.hdr{background:#080c14;border-bottom:1px solid #1a2540;padding:1.25rem 1.5rem}
-.hdr-inner{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap}
-.hdr-brand{font-size:9px;letter-spacing:0.2em;color:#22d3a5;font-family:'DM Mono',monospace;text-transform:uppercase;margin-bottom:5px}
-.hdr-title{font-size:1.05rem;font-weight:500;color:#f8fafc;letter-spacing:-0.01em;line-height:1.3;margin-bottom:3px}
-.hdr-sub{font-size:10px;color:#3d5068;font-family:'DM Mono',monospace}
-.hdr-right{text-align:right;flex-shrink:0}
-.hdr-num-label{font-size:9px;color:#3d5068;font-family:'DM Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:2px}
-.hdr-num{font-size:2.25rem;font-weight:300;color:#22d3a5;letter-spacing:-0.04em;line-height:1}
-.hdr-num-sub{font-size:9px;color:#2a3a50;font-family:'DM Mono',monospace;margin-top:2px}
-.hdr-bar{max-width:1400px;margin:0.875rem auto 0;padding-top:0.875rem;border-top:1px solid #1a2540;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
-.active-label{font-size:9px;color:#3d5068;font-family:'DM Mono',monospace}
-.active-val{font-size:9px;color:#22d3a5;font-family:'DM Mono',monospace;font-weight:500}
-.indicative{font-size:9px;color:#2a3a50;font-family:'DM Mono',monospace;font-style:italic}
+.hdr{background:var(--s1);border-bottom:1px solid var(--b1);padding:1.5rem 2rem}
+.hdr-inner{max-width:1380px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:1.5rem;flex-wrap:wrap}
+.hdr-brand{font-size:9px;letter-spacing:0.22em;color:var(--teal);font-family:'DM Mono',monospace;text-transform:uppercase;margin-bottom:6px;opacity:0.8}
+.hdr-title{font-size:1.125rem;font-weight:600;color:var(--t1);letter-spacing:-0.015em;line-height:1.25;margin-bottom:4px}
+.hdr-sub{font-size:10px;color:var(--t3);font-family:'DM Mono',monospace;letter-spacing:0.03em}
+.hdr-stat{text-align:right;flex-shrink:0}
+.hdr-stat-lbl{font-size:9px;color:var(--t3);font-family:'DM Mono',monospace;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:3px}
+.hdr-stat-num{font-size:2.75rem;font-weight:300;color:var(--teal);letter-spacing:-0.05em;line-height:1}
+.hdr-stat-sub{font-size:9px;color:var(--t4);font-family:'DM Mono',monospace;margin-top:2px}
+.hdr-bar{max-width:1380px;margin:.875rem auto 0;padding-top:.875rem;border-top:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.hdr-viewing{display:flex;align-items:center;gap:6px}
+.hdr-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);flex-shrink:0}
+.hdr-lbl{font-size:9px;color:var(--t3);font-family:'DM Mono',monospace}
+.hdr-val{font-size:9px;color:var(--teal);font-family:'DM Mono',monospace;font-weight:500}
+.hdr-note{font-size:9px;color:var(--t4);font-family:'DM Mono',monospace;font-style:italic}
 
 /* BODY */
-.body{padding:1.25rem 1.5rem;max-width:1400px;margin:0 auto}
+.body{padding:1.75rem 2rem;max-width:1380px;margin:0 auto}
+
+/* CONTRAST STRIP — the key finding */
+.contrast{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1px;
+  background:var(--b1);
+  border-radius:10px;
+  overflow:hidden;
+  margin-bottom:1.25rem;
+}
+@media(max-width:540px){.contrast{grid-template-columns:1fr}}
+.contrast-panel{
+  background:var(--s1);
+  padding:1.25rem 1.5rem;
+  position:relative;
+  overflow:hidden;
+}
+.contrast-panel.c-teal{border-left:3px solid var(--teal)}
+.contrast-panel.c-red{border-left:3px solid var(--red)}
+.contrast-who{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:.5rem;opacity:0.4}
+.contrast-num{
+  font-size:2.25rem;
+  font-weight:300;
+  letter-spacing:-0.04em;
+  line-height:1;
+  margin-bottom:.375rem;
+}
+.c-teal .contrast-num{color:var(--teal)}
+.c-red .contrast-num{color:var(--red)}
+.contrast-label{font-size:12px;font-weight:500;color:var(--t1);margin-bottom:3px;line-height:1.4}
+.contrast-sub{font-family:'DM Mono',monospace;font-size:10px;color:var(--t2);margin-bottom:.875rem}
+.contrast-detail{font-size:10px;color:var(--t3);line-height:1.6;padding-top:.875rem;border-top:1px solid var(--b1)}
 
 /* KPI ROW */
-.kpi-row{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:#1a2540;border-radius:12px;overflow:hidden;margin-bottom:1.5rem}
-@media(min-width:540px){.kpi-row{grid-template-columns:repeat(3,1fr)}}
-@media(min-width:900px){.kpi-row{grid-template-columns:repeat(6,1fr)}}
-.kpi{background:#080c14;padding:1.125rem;position:relative;overflow:hidden}
-.kpi::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px}
-.kpi-num{font-size:2.25rem;font-weight:300;letter-spacing:-0.04em;line-height:1;margin-bottom:5px}
-.kpi-label{font-size:11px;font-weight:500;color:#64748b;line-height:1.4;margin-bottom:3px}
-.kpi-sub{font-size:9px;color:#2a3a50;font-family:'DM Mono',monospace;line-height:1.4}
+.kpis{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1px;
+  background:var(--b1);
+  border-radius:10px;
+  overflow:hidden;
+  margin-bottom:1.75rem;
+}
+@media(min-width:600px){.kpis{grid-template-columns:repeat(4,1fr)}}
+.kpi{background:var(--s1);padding:1.125rem 1.375rem}
+.kpi-n{font-size:1.875rem;font-weight:300;letter-spacing:-0.04em;line-height:1;margin-bottom:4px}
+.kpi-lbl{font-size:11px;font-weight:500;color:var(--t2);line-height:1.35;margin-bottom:2px}
+.kpi-sub{font-family:'DM Mono',monospace;font-size:9px;color:var(--t3);line-height:1.4}
 
 /* CARD */
-.card{background:#0d1525;border:1px solid #1a2540;border-radius:10px;padding:1.125rem;margin-bottom:1rem}
-.card-label{font-size:9px;letter-spacing:0.15em;color:#3d5068;font-family:'DM Mono',monospace;text-transform:uppercase;margin-bottom:1rem;padding-bottom:0.625rem;border-bottom:1px solid #1a2540;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px}
-.card-note{font-size:9px;color:#2a3a50;font-family:'DM Mono',monospace;letter-spacing:0;text-transform:none;font-style:italic}
+.card{background:var(--s1);border:1px solid var(--b1);border-radius:10px;padding:1.375rem;margin-bottom:1.25rem}
+.card-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid var(--b1);flex-wrap:wrap;gap:4px}
+.card-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;color:var(--t2);text-transform:uppercase}
+.card-note{font-family:'DM Mono',monospace;font-size:9px;color:var(--t3);font-style:italic;letter-spacing:0;text-transform:none}
 
 /* TWO COL */
-.two-col{display:grid;grid-template-columns:1fr;gap:1rem;margin-bottom:1rem}
-@media(min-width:800px){.two-col{grid-template-columns:1fr 1.2fr}}
+.two-col{display:grid;grid-template-columns:1fr;gap:1.25rem;margin-bottom:1.25rem}
+@media(min-width:800px){.two-col{grid-template-columns:1fr 1.35fr}}
 
-/* TYPE BREAKDOWN */
-.type-block{margin-bottom:12px}
-.type-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
-.type-name{font-size:12px;color:#94a3b8;font-weight:500}
-.type-count{font-size:11px;color:#475569;font-family:'DM Mono',monospace}
-.type-track{height:7px;background:#1a2540;border-radius:4px;overflow:hidden;display:flex;gap:1px}
-.type-fill{height:100%;transition:width 0.4s ease;border-radius:2px}
-.type-sub{font-size:9px;color:#2a3a50;font-family:'DM Mono',monospace;margin-top:3px}
-.divider{border:none;border-top:1px solid #1a2540;margin:14px 0}
+/* TYPE BARS */
+.type-block{margin-bottom:10px}
+.type-hdr{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.type-name{font-size:12px;font-weight:500;color:var(--t1)}
+.type-count{font-family:'DM Mono',monospace;font-size:11px;color:var(--t2)}
+.track{height:5px;background:var(--b1);border-radius:3px;overflow:hidden;display:flex;gap:1px}
+.fill{height:100%;border-radius:2px;transition:width .4s ease}
+.type-sub{font-family:'DM Mono',monospace;font-size:9px;color:var(--t3);margin-top:3px}
+.hr{border:none;border-top:1px solid var(--b1);margin:14px 0}
 
 /* SECTOR GRID */
-.sector-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3px}
-@media(min-width:480px){.sector-grid{grid-template-columns:repeat(3,1fr)}}
-@media(min-width:1000px){.sector-grid{grid-template-columns:repeat(4,1fr)}}
-.sec-cell{background:#080c14;border:1px solid #1a2540;border-radius:6px;padding:8px 10px;cursor:pointer;transition:all 0.15s;border-left:3px solid transparent;position:relative}
-.sec-cell:hover{border-left-color:var(--sc);background:#0a111f}
-.sec-cell.act{border-left-color:var(--sc);background:#0d1a2a}
-.sec-cell.dim{opacity:0.25;pointer-events:none}
-.sec-count{font-size:1.35rem;font-weight:300;letter-spacing:-0.03em;line-height:1;margin-bottom:2px}
-.sec-name{font-size:9px;font-family:'DM Mono',monospace;color:#3d5068;line-height:1.3}
-.sec-bar-wrap{height:3px;background:#1a2540;border-radius:2px;margin-top:6px;overflow:hidden}
-.sec-bar-fill{height:100%;border-radius:2px;opacity:0.45;transition:width 0.3s}
-.sec-fi{position:absolute;top:6px;right:7px;font-size:8px;font-family:'DM Mono',monospace;color:#22d3a5;opacity:0.55}
+.sgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:3px}
+@media(min-width:480px){.sgrid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1000px){.sgrid{grid-template-columns:repeat(4,1fr)}}
+.sc{
+  background:var(--bg);
+  border:1px solid var(--b1);
+  border-left:2px solid transparent;
+  border-radius:7px;
+  padding:9px 11px;
+  cursor:pointer;
+  transition:all .15s;
+  position:relative;
+}
+.sc:hover{background:var(--s2);border-left-color:var(--c)}
+.sc.act{background:var(--s2);border-left-color:var(--c)}
+.sc.dim{opacity:0.18;pointer-events:none}
+.sc-n{font-size:1.25rem;font-weight:300;letter-spacing:-0.02em;line-height:1;margin-bottom:2px}
+.sc-name{font-family:'DM Mono',monospace;font-size:8px;color:var(--t3);line-height:1.3;letter-spacing:0.04em}
+.sc-bar{height:2px;background:var(--b1);border-radius:1px;margin-top:6px;overflow:hidden}
+.sc-fill{height:100%;border-radius:1px;opacity:0.35}
+.sc-fi{position:absolute;top:6px;right:7px;font-family:'DM Mono',monospace;font-size:8px;color:var(--teal);opacity:0.55}
 
-/* PARTICIPATION GAP */
-.gap-legend{display:flex;gap:1.25rem;margin-bottom:12px;flex-wrap:wrap}
-.gap-leg{display:flex;align-items:center;gap:5px;font-size:9px;color:#475569;font-family:'DM Mono',monospace}
-.gap-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+/* GAP CHART */
 .gap-rows{display:flex;flex-direction:column;gap:5px}
-.gap-row{display:flex;align-items:center;gap:8px}
-.gap-sector-label{flex:0 0 130px;font-size:11px;color:#475569;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.gap-sector-label.dim{color:#1e2d3d}
-.gap-track{flex:1;height:18px;background:#0d1525;border-radius:3px;overflow:hidden;display:flex;gap:1px;min-width:0}
-.gap-seg{height:100%;display:flex;align-items:center;justify-content:center;font-size:9px;font-family:'DM Mono',monospace;transition:flex 0.4s;min-width:0;overflow:hidden}
-.gap-seg-text{padding:0 4px;color:rgba(8,12,20,0.75);font-weight:500;white-space:nowrap}
-.gap-total{flex:0 0 26px;text-align:right;font-size:10px;color:#2a3a50;font-family:'DM Mono',monospace}
+.gap-row{display:flex;align-items:center;gap:10px}
+.gap-lbl{flex:0 0 120px;font-family:'DM Mono',monospace;font-size:10px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gap-lbl.dim{color:var(--t4)}
+.gap-track{flex:1;height:20px;background:var(--b1);border-radius:3px;overflow:hidden;display:flex;gap:1px}
+.gap-seg{height:100%;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:9px;min-width:0;overflow:hidden;border-radius:2px}
+.gap-seg-t{padding:0 5px;color:rgba(7,9,15,0.75);font-weight:500;white-space:nowrap}
+.gap-tot{flex:0 0 26px;text-align:right;font-family:'DM Mono',monospace;font-size:10px;color:var(--t3)}
 
 /* TABLE */
-.tbl-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;padding-bottom:0.625rem;border-bottom:1px solid #1a2540;flex-wrap:wrap;gap:4px}
-.tbl-top-label{font-size:9px;letter-spacing:0.15em;color:#3d5068;font-family:'DM Mono',monospace;text-transform:uppercase}
-.tbl-top-count{font-size:9px;color:#2a3a50;font-family:'DM Mono',monospace}
-.tbl-caveat{background:#080c14;border:1px solid #1a2540;border-radius:5px;padding:7px 10px;margin-bottom:10px;font-size:9px;color:#2a3a50;font-family:'DM Mono',monospace;line-height:1.6}
-.tbl-search{width:100%;background:#080c14;border:1px solid #1a2540;border-radius:5px;padding:6px 10px;font-size:11px;color:#94a3b8;font-family:'DM Mono',monospace;margin-bottom:8px;outline:none}
-.tbl-search:focus{border-color:#22d3a5}
-.tbl-search::placeholder{color:#2a3a50}
+.tbl-search{width:100%;background:var(--bg);border:1px solid var(--b1);border-radius:7px;padding:7px 12px;font-size:11px;font-family:'DM Mono',monospace;color:var(--t1);margin-bottom:8px;outline:none;transition:border-color .15s}
+.tbl-search:focus{border-color:var(--teal)}
+.tbl-search::placeholder{color:var(--t4)}
+.tbl-caveat{background:var(--bg);border:1px solid var(--b1);border-radius:6px;padding:7px 11px;margin-bottom:9px;font-family:'DM Mono',monospace;font-size:9px;color:var(--t3);line-height:1.65}
 table{width:100%;border-collapse:collapse;font-size:11px}
-th{text-align:left;padding:5px 8px;font-size:9px;color:#2a3a50;font-family:'DM Mono',monospace;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;border-bottom:1px solid #1a2540;white-space:nowrap;background:#080c14;cursor:pointer;user-select:none}
-th:hover{color:#64748b}
-td{padding:6px 8px;border-bottom:1px solid #0d1525;vertical-align:middle;color:#64748b}
-td:first-child{color:#94a3b8;font-weight:500;max-width:185px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-tr:hover td{background:#0d1a2a}
+th{text-align:left;padding:5px 9px;font-family:'DM Mono',monospace;font-size:9px;color:var(--t3);font-weight:400;letter-spacing:0.1em;text-transform:uppercase;border-bottom:1px solid var(--b1);white-space:nowrap;background:var(--bg);cursor:pointer;user-select:none}
+th:hover{color:var(--t2)}
+td{padding:6px 9px;border-bottom:1px solid var(--b1);vertical-align:middle;color:var(--t2)}
+td:first-child{color:var(--t1);font-weight:500;max-width:195px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+tr:hover td{background:rgba(29,233,182,0.025)}
 tr:last-child td{border-bottom:none}
-.badge{font-size:9px;padding:2px 6px;border-radius:8px;font-family:'DM Mono',monospace;display:inline-block;white-space:nowrap}
-.fi-yes{font-size:9px;color:#22d3a5;font-family:'DM Mono',monospace}
-.src-link{font-size:9px;color:#22d3a5;font-family:'DM Mono',monospace;text-decoration:none;opacity:0.5}
-.src-link:hover{opacity:1}
+.badge{font-family:'DM Mono',monospace;font-size:9px;padding:2px 7px;border-radius:20px;display:inline-block;white-space:nowrap}
+.fi-yes{font-family:'DM Mono',monospace;font-size:9px;color:var(--teal)}
+.src{font-family:'DM Mono',monospace;font-size:9px;color:var(--teal);text-decoration:none;opacity:0.45}
+.src:hover{opacity:1}
 
 /* FOOTER */
-.footer{background:#080c14;border-top:1px solid #1a2540;padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:0.5rem}
-.footer-text{font-size:9px;color:#2a3a50;font-family:'DM Mono',monospace;line-height:1.7}
-.footer-brand{font-size:10px;color:#22d3a5;font-family:'DM Mono',monospace;letter-spacing:0.15em;opacity:0.6}
+.footer{background:var(--s1);border-top:1px solid var(--b1);padding:1.125rem 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:.5rem}
+.footer-t{font-family:'DM Mono',monospace;font-size:9px;color:var(--t3);line-height:1.75}
+.footer-b{font-family:'DM Mono',monospace;font-size:10px;color:var(--teal);letter-spacing:0.18em;opacity:0.55;font-weight:500}
 </style>
 </head>
 <body>
@@ -118,93 +179,113 @@ tr:last-child td{border-bottom:none}
       <div class="hdr-title">Accelerating Infrastructure — Public Consultation</div>
       <div class="hdr-sub">Dept. of Public Expenditure, Infrastructure, Public Service Reform &amp; Digitalisation · Ireland · 2025</div>
     </div>
-    <div class="hdr-right">
-      <div class="hdr-num-label">Submissions analysed</div>
-      <div class="hdr-num" id="hdrTotal">165</div>
-      <div class="hdr-num-sub">of 166 published</div>
+    <div class="hdr-stat">
+      <div class="hdr-stat-lbl">Submissions analysed</div>
+      <div class="hdr-stat-num" id="hdrN">165</div>
+      <div class="hdr-stat-sub">of 166 published on gov.ie</div>
     </div>
   </div>
   <div class="hdr-bar">
-    <div><span class="active-label">Viewing: </span><span class="active-val" id="activeLabel">All submissions</span></div>
-    <div class="indicative">Sector and type from form data · source documents linked throughout</div>
+    <div class="hdr-viewing">
+      <div class="hdr-dot"></div>
+      <span class="hdr-lbl">Viewing: </span>
+      <span class="hdr-val" id="activeLabel">All submissions</span>
+    </div>
+    <div class="hdr-note">Sector and type from form data · source documents linked throughout</div>
   </div>
 </div>
 
 <div class="body">
 
-  <!-- KPI ROW -->
-  <div class="kpi-row">
-    <div class="kpi" style="--c:#f8fafc">
-      <div class="kpi::after" style="background:#475569"></div>
-      <div class="kpi-num" id="kpiTotal" style="color:#f8fafc">165</div>
-      <div class="kpi-label">Submissions analysed</div>
-      <div class="kpi-sub">of 166 published on gov.ie</div>
+  <!-- CONTRAST -->
+  <div class="contrast">
+    <div class="contrast-panel c-teal">
+      <div class="contrast-who">Of organisations</div>
+      <div class="contrast-num" id="cpOrg">54%</div>
+      <div class="contrast-label">submitted a detailed further information document</div>
+      <div class="contrast-sub" id="csOrg">52 of 96 organisation submissions</div>
+      <div class="contrast-detail">Industry bodies, state agencies, engineering firms and energy developers came with analysis, evidence, and structured argument.</div>
     </div>
-    <div class="kpi">
-      <div class="kpi-num" id="kpiOrgs" style="color:#60a5fa">96</div>
-      <div class="kpi-label">Organisation submissions</div>
-      <div class="kpi-sub" id="kpiOrgsSub">58% of total · 83 named</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-num" id="kpiIndivs" style="color:#94a3b8">69</div>
-      <div class="kpi-label">Individual citizen submissions</div>
-      <div class="kpi-sub" id="kpiIndivsSub">42% of total</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-num" style="color:#f87171">3</div>
-      <div class="kpi-label">Organised community groups</div>
-      <div class="kpi-sub">Midleton · S2S · Homebuyer's Hero</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-num" id="kpiFIOrg" style="color:#22d3a5">54%</div>
-      <div class="kpi-label">Of organisations submitted further information</div>
-      <div class="kpi-sub" id="kpiFIOrgSub">52 of 96 submissions</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-num" id="kpiFIIndiv" style="color:#fb923c">1%</div>
-      <div class="kpi-label">Of individuals submitted further information</div>
-      <div class="kpi-sub" id="kpiFIIndivSub">1 of 69 submissions</div>
+    <div class="contrast-panel c-red">
+      <div class="contrast-who">Of individual citizens</div>
+      <div class="contrast-num" id="cpIndiv">1%</div>
+      <div class="contrast-label">submitted a detailed further information document</div>
+      <div class="contrast-sub" id="csIndiv">1 of 69 individual submissions</div>
+      <div class="contrast-detail">68 of 69 individual citizens submitted via the online form only. Their views are present. Their capacity to engage in depth was not matched.</div>
     </div>
   </div>
 
-  <!-- WHO RESPONDED + SECTOR -->
+  <!-- KPIs -->
+  <div class="kpis">
+    <div class="kpi">
+      <div class="kpi-n" id="kN" style="color:var(--t1)">165</div>
+      <div class="kpi-lbl">Submissions analysed</div>
+      <div class="kpi-sub">of 166 published</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-n" id="kO" style="color:var(--blue)">96</div>
+      <div class="kpi-lbl">Organisation submissions</div>
+      <div class="kpi-sub" id="kOS">58% · 83 named</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-n" id="kI" style="color:var(--t2)">69</div>
+      <div class="kpi-lbl">Individual citizen submissions</div>
+      <div class="kpi-sub" id="kIS">42% of total</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-n" style="color:var(--red)">3</div>
+      <div class="kpi-lbl">Organised community groups</div>
+      <div class="kpi-sub">Midleton · S2S · Homebuyer's Hero</div>
+    </div>
+  </div>
+
+  <!-- WHO + SECTOR -->
   <div class="two-col">
     <div class="card" style="margin-bottom:0">
-      <div class="card-label">Who responded</div>
+      <div class="card-hdr"><span class="card-lbl">Who responded</span></div>
       <div id="typeBreakdown"></div>
     </div>
     <div class="card" style="margin-bottom:0">
-      <div class="card-label">
-        <span>By sector — click to filter</span>
-        <span class="card-note">◆ = submitted further information</span>
+      <div class="card-hdr">
+        <span class="card-lbl">By sector — click to filter</span>
+        <span class="card-note">◆ submitted further information</span>
       </div>
-      <div class="sector-grid" id="sectorGrid"></div>
+      <div class="sgrid" id="sgrid"></div>
     </div>
   </div>
 
-  <!-- PARTICIPATION GAP -->
+  <!-- GAP CHART -->
   <div class="card">
-    <div class="card-label">
-      <span>Depth of engagement by sector</span>
-      <span class="card-note">Coloured = submitted further information document · Dark = form only</span>
+    <div class="card-hdr">
+      <span class="card-lbl">Depth of engagement by sector</span>
+      <span class="card-note">Coloured = further information · Dark = form only</span>
     </div>
-    <div class="gap-rows" id="gapChart"></div>
+    <div style="display:grid;grid-template-columns:1fr;gap:1.5rem">
+      <div style="display:grid;grid-template-columns:1fr auto;gap:0;align-items:center" id="gapInner">
+        <div class="gap-rows" id="gapChart" style="padding-right:1.5rem;border-right:1px solid var(--b1)"></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:1rem;flex-shrink:0;padding-left:1.5rem;min-width:160px">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--t3);letter-spacing:0.12em;text-transform:uppercase;text-align:center">Named vs anonymous</div>
+          <svg id="gapDonut" viewBox="0 0 120 120" style="width:110px;height:110px;flex-shrink:0"></svg>
+          <div id="gapDonutLegend" style="display:flex;flex-direction:column;gap:6px;width:100%"></div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- TABLE -->
   <div class="card">
-    <div class="tbl-top">
-      <div class="tbl-top-label">Named respondents — reference</div>
-      <div class="tbl-top-count" id="tblCount"></div>
+    <div class="card-hdr">
+      <span class="card-lbl">Named respondents — reference</span>
+      <span class="card-note" id="tblCount"></span>
     </div>
-    <div class="tbl-caveat">Sector and type classifications are from form data. Click <span style="color:#22d3a5">View →</span> to read the original submission on gov.ie.</div>
+    <div class="tbl-caveat">Sector and type from form data. Click <span style="color:var(--teal)">View →</span> to read the original submission on gov.ie.</div>
     <input class="tbl-search" id="tblSearch" placeholder="Search by name or sector..." type="text">
     <div style="overflow-x:auto">
       <table>
         <thead><tr>
-          <th style="width:200px" onclick="sortTable('org')">Respondent ↕</th>
-          <th style="width:130px" onclick="sortTable('sector')">Sector ↕</th>
-          <th style="width:90px" onclick="sortTable('type')">Type ↕</th>
+          <th style="width:200px" onclick="srt('org')">Respondent ↕</th>
+          <th style="width:130px" onclick="srt('sector')">Sector ↕</th>
+          <th style="width:90px" onclick="srt('type')">Type ↕</th>
           <th style="width:90px">Further info</th>
           <th style="width:60px">Source</th>
         </tr></thead>
@@ -216,192 +297,186 @@ tr:last-child td{border-bottom:none}
 </div>
 
 <div class="footer">
-  <div class="footer-text">
-    Source: gov.ie · 165 of 166 submissions analysed · sector and type classifications from form data · submission 134 failed to extract<br>
+  <div class="footer-t">
+    Source: gov.ie · 165 of 166 submissions analysed · sector and type from form data · submission 134 failed to extract<br>
     Easca Consulting · eascaconsulting.com · Your Expert in Engagement Data Management
   </div>
-  <div class="footer-brand">EASCA CONSULTING</div>
+  <div class="footer-b">EASCA CONSULTING</div>
 </div>
 
 <script>
 const ALL=[{"n":1,"org":"Anonymous organisation","type":"Organisation","sector":"Business/Industry","issues":["Planning delays","Regulatory complexity","Funding/investment","Delivery timelines"],"position":"Conditional support","summary":"Supports reform but highlights risk-return tensions in PPPs","url":"https://assets.gov.ie/static/documents/deddb964/Public_Consultation_on_Accelerating_Infrastructure_Submission_1.pdf","has_further_info":false},{"n":2,"org":"Anonymous organisation","type":"Organisation","sector":"Other","issues":["Agency coordination","Delivery timelines"],"position":"Conditional support","summary":"Wants unified governance body for infrastructure","url":"https://assets.gov.ie/static/documents/aa615db2/Public_Consultation_on_Accelerating_Infrastructure_Submission_2.pdf","has_further_info":false},{"n":3,"org":"Anonymous organisation","type":"Organisation","sector":"Professional Services","issues":["Delivery timelines","Regulatory complexity","Agency coordination","Climate/sustainability"],"position":"Supportive","summary":"Broadly positive on reform direction, stresses long-term planning","url":"https://assets.gov.ie/static/documents/bdb04b03/Public_Consultation_on_Accelerating_Infrastructure_Submission_3.pdf","has_further_info":false},{"n":4,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines","Agency coordination"],"position":"Raising concerns","summary":"Frustrated by infrastructure failures affecting public services","url":"https://assets.gov.ie/static/documents/cd3e1f5f/Public_Consultation_on_Accelerating_Infrastructure_Submission_4.pdf","has_further_info":false},{"n":5,"org":"Edelman Ireland","type":"Organisation","sector":"Professional Services","issues":["Public consultation","Community engagement","Delivery timelines"],"position":"Conditional support","summary":"Supports acceleration but calls for stronger public engagement","url":"https://assets.gov.ie/static/documents/650a1342/Public_Consultation_on_Accelerating_Infrastructure_Submission_5.pdf","has_further_info":true},{"n":6,"org":"HISCo (sub. 6)","type":"Organisation","sector":"Construction/Development","issues":["Agency coordination","Grid connections","Funding/investment","Housing delivery"],"position":"Raising concerns","summary":"No formal coordination between delivery agents; systemic gap","url":"https://assets.gov.ie/static/documents/de8a6717/Public_Consultation_on_Accelerating_Infrastructure_Submission_6.pdf","has_further_info":true},{"n":7,"org":"HISCo (sub. 7)","type":"Organisation","sector":"Construction/Development","issues":["Agency coordination","Housing delivery","Grid connections","Delivery timelines"],"position":"Raising concerns","summary":"Calls for integrated delivery model across state agencies","url":"https://assets.gov.ie/static/documents/4209e4f2/Public_Consultation_on_Accelerating_Infrastructure_Submission_7.pdf","has_further_info":true},{"n":8,"org":"HISCo (sub. 8)","type":"Organisation","sector":"Construction/Development","issues":["Agency coordination","Funding/investment","Housing delivery"],"position":"Raising concerns","summary":"Follow-on submission: state agencies not working together","url":"https://assets.gov.ie/static/documents/8c5775ea/Public_Consultation_on_Accelerating_Infrastructure_Submission_8.pdf","has_further_info":true},{"n":9,"org":"Trifecta Ireland","type":"Organisation","sector":"Energy","issues":["Grid connections","Delivery timelines","Regulatory complexity","Legal reform"],"position":"Raising concerns","summary":"Ireland outlier in Europe for slow electricity infrastructure","url":"https://assets.gov.ie/static/documents/70cfe280/Public_Consultation_on_Accelerating_Infrastructure_Submission_9.pdf","has_further_info":true},{"n":10,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Regulatory complexity","Agency coordination","Delivery timelines"],"position":"Conditional support","summary":"Right structures exist but post-2008 capacity decimated","url":"https://assets.gov.ie/static/documents/652acf38/Public_Consultation_on_Accelerating_Infrastructure_Submission_10.pdf","has_further_info":false},{"n":11,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Legal reform","Delivery timelines"],"position":"Raising concerns","summary":"Flood relief schemes blocked by ministerial consent bottleneck","url":"https://assets.gov.ie/static/documents/1c60e0d1/Public_Consultation_on_Accelerating_Infrastructure_Submission_11.pdf","has_further_info":false},{"n":12,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines","Agency coordination"],"position":"Raising concerns","summary":"System too slow; multiple veto points causing gridlock","url":"https://assets.gov.ie/static/documents/4992e6ec/Public_Consultation_on_Accelerating_Infrastructure_Submission_12.pdf","has_further_info":false},{"n":13,"org":"Northern & Western Regional Assembly","type":"Organisation","sector":"Local Government","issues":["Planning delays","Delivery timelines","Funding/investment","Agency coordination"],"position":"Raising concerns","summary":"Appraisal processes too onerous; regional investment needed","url":"https://assets.gov.ie/static/documents/8a51935e/Public_Consultation_on_Accelerating_Infrastructure_Submission_13.pdf","has_further_info":true},{"n":14,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"General frustration with pace of infrastructure delivery","url":"https://assets.gov.ie/static/documents/b8e948af/Public_Consultation_on_Accelerating_Infrastructure_Submission_14.pdf","has_further_info":false},{"n":15,"org":"Laois County Council","type":"Organisation","sector":"Local Government","issues":["Agency coordination","Funding/investment","Planning delays","Capacity/skills"],"position":"Conditional support","summary":"Plan-led but needs better national-local coordination","url":"https://assets.gov.ie/static/documents/c7e2a1e7/Public_Consultation_on_Accelerating_Infrastructure_Submission_15.pdf","has_further_info":false},{"n":16,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Systemic delays prevent timely infrastructure delivery","url":"https://assets.gov.ie/static/documents/9129eebe/Public_Consultation_on_Accelerating_Infrastructure_Submission_16.pdf","has_further_info":false},{"n":17,"org":"An Taisce","type":"Organisation","sector":"Environmental/NGO","issues":["Environmental assessment","Public consultation","Legal reform","Climate/sustainability"],"position":"Mixed","summary":"Reform welcome but must not undermine environmental safeguards","url":"https://assets.gov.ie/static/documents/eda874c6/Public_Consultation_on_Accelerating_Infrastructure_Submission_17.pdf","has_further_info":true},{"n":18,"org":"COWI UK & Ireland","type":"Organisation","sector":"Professional Services","issues":["Agency coordination","Delivery timelines","Capacity/skills","Planning delays"],"position":"Conditional support","summary":"Fragmentation across departments causing delays; needs central delivery unit","url":"https://assets.gov.ie/static/documents/1b6eab78/Public_Consultation_on_Accelerating_Infrastructure_Submission_18.pdf","has_further_info":false},{"n":19,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Community engagement"],"position":"Raising concerns","summary":"Local infrastructure failures during storm events","url":"https://assets.gov.ie/static/documents/aaf88535/Public_Consultation_on_Accelerating_Infrastructure_Submission_19.pdf","has_further_info":false},{"n":20,"org":"Wind Energy Ireland","type":"Organisation","sector":"Energy","issues":["Planning delays","Grid connections","Legal reform","Environmental assessment"],"position":"Conditional support","summary":"Detailed submission: planning and grid key barriers to renewables","url":"https://assets.gov.ie/static/documents/8a46dabb/Public_Consultation_on_Accelerating_Infrastructure_Submission_20.pdf","has_further_info":true},{"n":21,"org":"Dublin City Council","type":"Organisation","sector":"Local Government","issues":["Grid connections","Planning delays","Agency coordination","Housing delivery"],"position":"Conditional support","summary":"Ambitious targets undermined by grid and planning constraints","url":"https://assets.gov.ie/static/documents/f93b9648/Public_Consultation_on_Accelerating_Infrastructure_Submission_21.pdf","has_further_info":true},{"n":22,"org":"Shannon Foynes Port Company","type":"Organisation","sector":"Transport","issues":["Planning delays","Funding/investment","Delivery timelines","Regulatory complexity"],"position":"Conditional support","summary":"Port infrastructure adequate historically but reform needed","url":"https://assets.gov.ie/static/documents/cb0305c5/Public_Consultation_on_Accelerating_Infrastructure_Submission_22.pdf","has_further_info":true},{"n":23,"org":"National Transport Authority","type":"Organisation","sector":"Transport","issues":["Planning delays","Agency coordination","Delivery timelines","Land/CPO"],"position":"Conditional support","summary":"Detailed NTA submission attached; systemic reform required","url":"https://assets.gov.ie/static/documents/39a1cd18/Public_Consultation_on_Accelerating_Infrastructure_Submission_23.pdf","has_further_info":true},{"n":24,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"System too slow across all infrastructure types","url":"https://assets.gov.ie/static/documents/2fb18dc6/Public_Consultation_on_Accelerating_Infrastructure_Submission_24.pdf","has_further_info":false},{"n":25,"org":"Transport Infrastructure Ireland","type":"Organisation","sector":"Transport","issues":["Planning delays","Legal reform","Land/CPO","Delivery timelines"],"position":"Raising concerns","summary":"Delivery increasingly difficult; TII notes rising complexity","url":"https://assets.gov.ie/static/documents/3bb08a1e/Public_Consultation_on_Accelerating_Infrastructure_Submission_25.pdf","has_further_info":false},{"n":26,"org":"Cloud Infrastructure Ireland","type":"Organisation","sector":"Business/Industry","issues":["Grid connections","Planning delays","Regulatory complexity","Delivery timelines"],"position":"Raising concerns","summary":"Data centre sector blocked by grid and planning constraints","url":"https://assets.gov.ie/static/documents/0c97ae88/Public_Consultation_on_Accelerating_Infrastructure_Submission_26.pdf","has_further_info":true},{"n":27,"org":"Bord Gáis Energy","type":"Organisation","sector":"Energy","issues":["Regulatory complexity","Agency coordination","Planning delays","Funding/investment"],"position":"Conditional support","summary":"Lacks integrated holistic planning framework for networks","url":"https://assets.gov.ie/static/documents/a83f9a7a/Public_Consultation_on_Accelerating_Infrastructure_Submission_27.pdf","has_further_info":true},{"n":28,"org":"Anonymous organisation","type":"Organisation","sector":"Other","issues":["Delivery timelines"],"position":"Raising concerns","summary":"Empty or minimal submission","url":"https://assets.gov.ie/static/documents/e0197654/Public_Consultation_on_Accelerating_Infrastructure_Submission_28.pdf","has_further_info":false},{"n":29,"org":"Mayo County Council","type":"Organisation","sector":"Local Government","issues":["Agency coordination","Funding/investment","Planning delays","Delivery timelines"],"position":"Conditional support","summary":"Coordinated strategic planning needed; regions underserved","url":"https://assets.gov.ie/static/documents/26574359/Public_Consultation_on_Accelerating_Infrastructure_Submission_29.pdf","has_further_info":false},{"n":30,"org":"Anonymous organisation","type":"Organisation","sector":"Other","issues":["Delivery timelines"],"position":"Raising concerns","summary":"Minimal submission","url":"https://assets.gov.ie/static/documents/ee48388b/Public_Consultation_on_Accelerating_Infrastructure_Submission_30.pdf","has_further_info":false},{"n":31,"org":"Turner & Townsend (sub. 31)","type":"Organisation","sector":"Professional Services","issues":["Planning delays","Capacity/skills","Procurement","Delivery timelines"],"position":"Conditional support","summary":"Successive governments failed to deliver; systemic reform needed","url":"https://assets.gov.ie/static/documents/23ec5715/Public_Consultation_on_Accelerating_Infrastructure_Submission_31.pdf","has_further_info":true},{"n":32,"org":"Turner & Townsend (sub. 32)","type":"Organisation","sector":"Professional Services","issues":["Planning delays","Capacity/skills","Procurement","Delivery timelines"],"position":"Conditional support","summary":"Duplicate submission; same key concerns","url":"https://assets.gov.ie/static/documents/1bd810f6/Public_Consultation_on_Accelerating_Infrastructure_Submission_32.pdf","has_further_info":true},{"n":33,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Infrastructure delays harming communities","url":"https://assets.gov.ie/static/documents/a156540b/Public_Consultation_on_Accelerating_Infrastructure_Submission_33.pdf","has_further_info":false},{"n":34,"org":"Individual (Engineer, Local Gov)","type":"Individual","sector":"Individual/Citizen","issues":["Capacity/skills","Planning delays","Agency coordination","Procurement"],"position":"Raising concerns","summary":"25 years experience: capacity and coordination are the core problem","url":"https://assets.gov.ie/static/documents/d1b41b8a/Public_Consultation_on_Accelerating_Infrastructure_Submission_34.pdf","has_further_info":false},{"n":35,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Delivery too slow across all sectors","url":"https://assets.gov.ie/static/documents/87408ed8/Public_Consultation_on_Accelerating_Infrastructure_Submission_35.pdf","has_further_info":false},{"n":36,"org":"ULI Ireland","type":"Organisation","sector":"Business/Industry","issues":["Regulatory complexity","Funding/investment","Investor confidence","Delivery timelines"],"position":"Conditional support","summary":"Competitiveness at risk; reform urgent but must be balanced","url":"https://assets.gov.ie/static/documents/96b9b0db/Public_Consultation_on_Accelerating_Infrastructure_Submission_36.pdf","has_further_info":true},{"n":37,"org":"Jacobs Ireland","type":"Organisation","sector":"Professional Services","issues":["Planning delays","Capacity/skills","Procurement","Delivery timelines"],"position":"Conditional support","summary":"Full response attached; planning and capacity key barriers","url":"https://assets.gov.ie/static/documents/afcee2e4/Public_Consultation_on_Accelerating_Infrastructure_Submission_37.pdf","has_further_info":true},{"n":38,"org":"CIEEM","type":"Organisation","sector":"Environmental/NGO","issues":["Environmental assessment","Public consultation","Climate/sustainability","Legal reform"],"position":"Mixed","summary":"Reform must not compromise ecological and environmental standards","url":"https://assets.gov.ie/static/documents/0b231c96/Public_Consultation_on_Accelerating_Infrastructure_Submission_38.pdf","has_further_info":true},{"n":39,"org":"Art Data Centres","type":"Organisation","sector":"Business/Industry","issues":["Grid connections","Regulatory complexity","Delivery timelines"],"position":"Raising concerns","summary":"Fibre, gas, electricity infrastructure delays since 2017","url":"https://assets.gov.ie/static/documents/a52f5f4e/Public_Consultation_on_Accelerating_Infrastructure_Submission_39.pdf","has_further_info":false},{"n":40,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Infrastructure delays unacceptable","url":"https://assets.gov.ie/static/documents/89d9f959/Public_Consultation_on_Accelerating_Infrastructure_Submission_40.pdf","has_further_info":false},{"n":41,"org":"Chambers Ireland","type":"Organisation","sector":"Business/Industry","issues":["Planning delays","Regulatory complexity","Delivery timelines","Investor confidence"],"position":"Conditional support","summary":"Full submission attached; urgent reform needed for competitiveness","url":"https://assets.gov.ie/static/documents/6cc55889/Public_Consultation_on_Accelerating_Infrastructure_Submission_41.pdf","has_further_info":true},{"n":42,"org":"Anonymous organisation","type":"Organisation","sector":"Other","issues":["Planning delays","Delivery timelines","Agency coordination"],"position":"Raising concerns","summary":"Systemic barriers preventing delivery","url":"https://assets.gov.ie/static/documents/1ed0d103/Public_Consultation_on_Accelerating_Infrastructure_Submission_42.pdf","has_further_info":false},{"n":43,"org":"Anonymous organisation","type":"Organisation","sector":"Other","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Delivery system needs reform","url":"https://assets.gov.ie/static/documents/c61e938b/Public_Consultation_on_Accelerating_Infrastructure_Submission_43.pdf","has_further_info":false},{"n":44,"org":"Bremore Ireland Port","type":"Organisation","sector":"Transport","issues":["Planning delays","Land/CPO","Funding/investment","Delivery timelines"],"position":"Conditional support","summary":"Port development blocked by planning and land access issues","url":"https://assets.gov.ie/static/documents/6f70a3e2/Public_Consultation_on_Accelerating_Infrastructure_Submission_44.pdf","has_further_info":true},{"n":45,"org":"Keeper Solutions","type":"Organisation","sector":"Professional Services","issues":["Planning delays","Regulatory complexity","Delivery timelines","Capacity/skills"],"position":"Conditional support","summary":"Ambitious plans held back by complex rules and limited capacity","url":"https://assets.gov.ie/static/documents/340f2c1e/Public_Consultation_on_Accelerating_Infrastructure_Submission_45.pdf","has_further_info":false},{"n":46,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Delivery too slow","url":"https://assets.gov.ie/static/documents/98b1533f/Public_Consultation_on_Accelerating_Infrastructure_Submission_46.pdf","has_further_info":false},{"n":47,"org":"Cairn Homes PLC","type":"Organisation","sector":"Construction/Development","issues":["Housing delivery","Grid connections","Planning delays","Funding/investment"],"position":"Raising concerns","summary":"Severe infrastructure shortage directly blocking housing","url":"https://assets.gov.ie/static/documents/29540d2e/Public_Consultation_on_Accelerating_Infrastructure_Submission_47.pdf","has_further_info":true},{"n":48,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"General frustration with system","url":"https://assets.gov.ie/static/documents/e930796f/Public_Consultation_on_Accelerating_Infrastructure_Submission_48.pdf","has_further_info":false},{"n":49,"org":"LDA","type":"Organisation","sector":"Construction/Development","issues":["Agency coordination","Housing delivery","Planning delays","Funding/investment"],"position":"Conditional support","summary":"Fragmented process; LDA calls for integrated delivery model","url":"https://assets.gov.ie/static/documents/42bb5901/Public_Consultation_on_Accelerating_Infrastructure_Submission_49.pdf","has_further_info":true},{"n":50,"org":"Irish Planning Institute","type":"Organisation","sector":"Professional Services","issues":["Planning delays","Agency coordination","Public consultation","Regulatory complexity"],"position":"Conditional support","summary":"Land use and infrastructure planning treated as separate; must integrate","url":"https://assets.gov.ie/static/documents/5b88b6a9/Public_Consultation_on_Accelerating_Infrastructure_Submission_50.pdf","has_further_info":false},{"n":51,"org":"Society of Chartered Surveyors Ireland","type":"Organisation","sector":"Professional Services","issues":["Regulatory complexity","Planning delays","Procurement","Delivery timelines"],"position":"Conditional support","summary":"Systemic inefficiencies; SCSI calls for streamlined processes","url":"https://assets.gov.ie/static/documents/d341ab36/Public_Consultation_on_Accelerating_Infrastructure_Submission_51.pdf","has_further_info":false},{"n":52,"org":"Statkraft","type":"Organisation","sector":"Energy","issues":["Planning delays","Grid connections","Investor confidence","Regulatory complexity"],"position":"Raising concerns","summary":"Lack of investment over 20 years; renewed focus welcome but insufficient","url":"https://assets.gov.ie/static/documents/aa9bea62/Public_Consultation_on_Accelerating_Infrastructure_Submission_52.pdf","has_further_info":true},{"n":53,"org":"Property Industry Ireland","type":"Organisation","sector":"Construction/Development","issues":["Planning delays","Housing delivery","Regulatory complexity","Agency coordination"],"position":"Conditional support","summary":"Ireland can do better; PII calls for streamlined delivery","url":"https://assets.gov.ie/static/documents/49231db3/Public_Consultation_on_Accelerating_Infrastructure_Submission_53.pdf","has_further_info":false},{"n":54,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Legal reform","Regulatory complexity"],"position":"Raising concerns","summary":"Compares badly with EU; NIMBY and planning cited as top barriers","url":"https://assets.gov.ie/static/documents/9bd73ee1/Public_Consultation_on_Accelerating_Infrastructure_Submission_54.pdf","has_further_info":false},{"n":55,"org":"Docklands Business Forum","type":"Organisation","sector":"Business/Industry","issues":["Agency coordination","Planning delays","Delivery timelines","Grid connections"],"position":"Raising concerns","summary":"Inconsistent, slow, no strategic coordination","url":"https://assets.gov.ie/static/documents/132f173d/Public_Consultation_on_Accelerating_Infrastructure_Submission_55.pdf","has_further_info":false},{"n":56,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Agency coordination","Regulatory complexity","Delivery timelines"],"position":"Raising concerns","summary":"Too many quangos with effective veto powers","url":"https://assets.gov.ie/static/documents/fdb41c20/Public_Consultation_on_Accelerating_Infrastructure_Submission_56.pdf","has_further_info":false},{"n":57,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"System fundamentally broken","url":"https://assets.gov.ie/static/documents/e89a8205/Public_Consultation_on_Accelerating_Infrastructure_Submission_57.pdf","has_further_info":false},{"n":58,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Infrastructure delays affecting quality of life","url":"https://assets.gov.ie/static/documents/bf5b564f/Public_Consultation_on_Accelerating_Infrastructure_Submission_58.pdf","has_further_info":false},{"n":59,"org":"Anonymous organisation","type":"Organisation","sector":"Other","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Systemic barriers preventing delivery","url":"https://assets.gov.ie/static/documents/bc395ad2/Public_Consultation_on_Accelerating_Infrastructure_Submission_59.pdf","has_further_info":false},{"n":60,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines","Regulatory complexity"],"position":"Raising concerns","summary":"Too slow; reform urgently needed","url":"https://assets.gov.ie/static/documents/07915552/Public_Consultation_on_Accelerating_Infrastructure_Submission_60.pdf","has_further_info":false},{"n":61,"org":"City & County Management Association","type":"Organisation","sector":"Local Government","issues":["Agency coordination","Funding/investment","Capacity/skills","Planning delays"],"position":"Conditional support","summary":"CCMA: local government under-resourced; coordination critical","url":"https://assets.gov.ie/static/documents/e0837b04/Public_Consultation_on_Accelerating_Infrastructure_Submission_61.pdf","has_further_info":true},{"n":62,"org":"Office of the Planning Regulator","type":"Organisation","sector":"Local Government","issues":["Planning delays","Regulatory complexity","Agency coordination","Public consultation"],"position":"Conditional support","summary":"OPR: capacity exists but system needs streamlining","url":"https://assets.gov.ie/static/documents/baeae7e5/Public_Consultation_on_Accelerating_Infrastructure_Submission_62.pdf","has_further_info":true},{"n":63,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Delays harming citizens","url":"https://assets.gov.ie/static/documents/4f1438ea/Public_Consultation_on_Accelerating_Infrastructure_Submission_63.pdf","has_further_info":false},{"n":64,"org":"VISION Consulting","type":"Organisation","sector":"Professional Services","issues":["Agency coordination","Public consultation","Delivery timelines","Regulatory complexity"],"position":"Raising concerns","summary":"Fragmented and adversarial; stakeholders treated as competitors","url":"https://assets.gov.ie/static/documents/67bec42d/Public_Consultation_on_Accelerating_Infrastructure_Submission_64.pdf","has_further_info":false},{"n":65,"org":"Anonymous organisation","type":"Organisation","sector":"Other","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Systemic reform needed","url":"https://assets.gov.ie/static/documents/e248ca53/Public_Consultation_on_Accelerating_Infrastructure_Submission_65.pdf","has_further_info":false},{"n":66,"org":"Green Party","type":"Organisation","sector":"Other","issues":["Climate/sustainability","Planning delays","Public consultation","Environmental assessment"],"position":"Mixed","summary":"Supports acceleration but must align with climate commitments","url":"https://assets.gov.ie/static/documents/237d1dcf/Public_Consultation_on_Accelerating_Infrastructure_Submission_66.pdf","has_further_info":false},{"n":67,"org":"Castlethorn","type":"Organisation","sector":"Construction/Development","issues":["Planning delays","Housing delivery","Funding/investment","Regulatory complexity"],"position":"Conditional support","summary":"State had strong delivery record; planning reform essential now","url":"https://assets.gov.ie/static/documents/38c90b4f/Public_Consultation_on_Accelerating_Infrastructure_Submission_67.pdf","has_further_info":true},{"n":68,"org":"John Laing","type":"Organisation","sector":"Business/Industry","issues":["Funding/investment","Procurement","Investor confidence","Delivery timelines"],"position":"Supportive","summary":"Strategic clarity present; private investment can accelerate delivery","url":"https://assets.gov.ie/static/documents/1d8a5f48/Public_Consultation_on_Accelerating_Infrastructure_Submission_68.pdf","has_further_info":false},{"n":69,"org":"AMBER Centre","type":"Organisation","sector":"Academia","issues":["Capacity/skills","Regulatory complexity","Agency coordination","Climate/sustainability"],"position":"Conditional support","summary":"Research perspective: capacity and skills fundamental bottleneck","url":"https://assets.gov.ie/static/documents/a360efa4/Public_Consultation_on_Accelerating_Infrastructure_Submission_69.pdf","has_further_info":true},{"n":70,"org":"Sligo County Council","type":"Organisation","sector":"Local Government","issues":["Funding/investment","Agency coordination","Planning delays","Delivery timelines"],"position":"Conditional support","summary":"Regional neglect; calls for better national-local funding","url":"https://assets.gov.ie/static/documents/9403b89a/Public_Consultation_on_Accelerating_Infrastructure_Submission_70.pdf","has_further_info":false},{"n":71,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Infrastructure failures affecting daily life","url":"https://assets.gov.ie/static/documents/d30fc831/Public_Consultation_on_Accelerating_Infrastructure_Submission_71.pdf","has_further_info":false},{"n":72,"org":"Individual (Active Travel)","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Public consultation","Community engagement","Transport"],"position":"Conditional support","summary":"Active travel schemes delayed; submission focused on cycling","url":"https://assets.gov.ie/static/documents/f1018201/Public_Consultation_on_Accelerating_Infrastructure_Submission_72.pdf","has_further_info":true},{"n":73,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"System too slow","url":"https://assets.gov.ie/static/documents/7d9d2fd9/Public_Consultation_on_Accelerating_Infrastructure_Submission_73.pdf","has_further_info":false},{"n":74,"org":"daa plc","type":"Organisation","sector":"Transport","issues":["Planning delays","Land/CPO","Regulatory complexity","Delivery timelines"],"position":"Conditional support","summary":"Airport infrastructure reform needed; full submission attached","url":"https://assets.gov.ie/static/documents/5cc901eb/Public_Consultation_on_Accelerating_Infrastructure_Submission_74.pdf","has_further_info":true},{"n":75,"org":"Iarnród Éireann","type":"Organisation","sector":"Transport","issues":["Planning delays","Funding/investment","Land/CPO","Delivery timelines"],"position":"Raising concerns","summary":"Rail not at required pace or scale; systemic reform essential","url":"https://assets.gov.ie/static/documents/0a6b7bb0/Public_Consultation_on_Accelerating_Infrastructure_Submission_75.pdf","has_further_info":false},{"n":76,"org":"Northwest Regional Enterprise Plan (sub. 76)","type":"Organisation","sector":"Local Government","issues":["Funding/investment","Agency coordination","Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Northwest severely underserved; regional balance needed","url":"https://assets.gov.ie/static/documents/3f829ed3/Public_Consultation_on_Accelerating_Infrastructure_Submission_76.pdf","has_further_info":true},{"n":77,"org":"Uisce Éireann","type":"Organisation","sector":"Water/Utilities","issues":["Regulatory complexity","Funding/investment","Agency coordination","Planning delays"],"position":"Conditional support","summary":"Complex oversight and controls; regulatory reform needed","url":"https://assets.gov.ie/static/documents/ca58c7eb/Public_Consultation_on_Accelerating_Infrastructure_Submission_77.pdf","has_further_info":true},{"n":78,"org":"Gaïa ecotecture","type":"Organisation","sector":"Environmental/NGO","issues":["Public consultation","Environmental assessment","Community engagement","Climate/sustainability"],"position":"Opposed","summary":"Developer-led monoculture; communities and environment excluded","url":"https://assets.gov.ie/static/documents/a2a9b126/Public_Consultation_on_Accelerating_Infrastructure_Submission_78.pdf","has_further_info":false},{"n":79,"org":"Irish Cycling Campaign","type":"Organisation","sector":"Transport","issues":["Planning delays","Public consultation","Community engagement","Agency coordination"],"position":"Conditional support","summary":"Central planning helps but active travel neglected","url":"https://assets.gov.ie/static/documents/ab540c45/Public_Consultation_on_Accelerating_Infrastructure_Submission_79.pdf","has_further_info":true},{"n":80,"org":"Offshore Wind Consortium","type":"Organisation","sector":"Energy","issues":["Grid connections","Planning delays","Regulatory complexity","Investor confidence"],"position":"Conditional support","summary":"Combined response from 5 offshore wind projects; grid critical barrier","url":"https://assets.gov.ie/static/documents/2d6747d9/Public_Consultation_on_Accelerating_Infrastructure_Submission_80.pdf","has_further_info":true},{"n":81,"org":"Health Service Executive","type":"Organisation","sector":"Other","issues":["Planning delays","Agency coordination","Regulatory complexity","Delivery timelines"],"position":"Raising concerns","summary":"Too slow and too uncertain; HSE capital projects severely delayed","url":"https://assets.gov.ie/static/documents/6c2646f3/Public_Consultation_on_Accelerating_Infrastructure_Submission_81.pdf","has_further_info":false},{"n":82,"org":"Friends of the Irish Environment","type":"Organisation","sector":"Environmental/NGO","issues":["Environmental assessment","Public consultation","Legal reform","Climate/sustainability"],"position":"Opposed","summary":"Acceleration must not bypass environmental safeguards","url":"https://assets.gov.ie/static/documents/ca87f8a9/Public_Consultation_on_Accelerating_Infrastructure_Submission_82.pdf","has_further_info":true},{"n":83,"org":"KPMG Ireland","type":"Organisation","sector":"Professional Services","issues":["Agency coordination","Delivery timelines","Regulatory complexity","Capacity/skills"],"position":"Conditional support","summary":"Lost our way; structure and prioritisation must be restored","url":"https://assets.gov.ie/static/documents/7d828597/Public_Consultation_on_Accelerating_Infrastructure_Submission_83.pdf","has_further_info":true},{"n":84,"org":"Equitix","type":"Organisation","sector":"Business/Industry","issues":["Funding/investment","Investor confidence","Procurement","Regulatory complexity"],"position":"Supportive","summary":"NDP foundation strong; private capital ready if barriers removed","url":"https://assets.gov.ie/static/documents/a8b6f696/Public_Consultation_on_Accelerating_Infrastructure_Submission_84.pdf","has_further_info":true},{"n":85,"org":"ESB (Generation & Trading)","type":"Organisation","sector":"Energy","issues":["Grid connections","Planning delays","Regulatory complexity","Climate/sustainability"],"position":"Conditional support","summary":"Energy focus; planning and grid critical for net zero","url":"https://assets.gov.ie/static/documents/af502883/Public_Consultation_on_Accelerating_Infrastructure_Submission_85.pdf","has_further_info":false},{"n":86,"org":"Anonymous organisation","type":"Organisation","sector":"Other","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Systemic barriers","url":"https://assets.gov.ie/static/documents/79fe3ad0/Public_Consultation_on_Accelerating_Infrastructure_Submission_86.pdf","has_further_info":false},{"n":87,"org":"Local Authority Waters Programme","type":"Organisation","sector":"Water/Utilities","issues":["Agency coordination","Environmental assessment","Funding/investment","Planning delays"],"position":"Conditional support","summary":"Project-by-project delivery misses programme-level opportunities","url":"https://assets.gov.ie/static/documents/c6b9ccbe/Public_Consultation_on_Accelerating_Infrastructure_Submission_87.pdf","has_further_info":false},{"n":88,"org":"Clancourt","type":"Organisation","sector":"Construction/Development","issues":["Housing delivery","Grid connections","Funding/investment","Planning delays"],"position":"Conditional support","summary":"Private delivery model can help if barriers removed","url":"https://assets.gov.ie/static/documents/386be371/Public_Consultation_on_Accelerating_Infrastructure_Submission_88.pdf","has_further_info":false},{"n":89,"org":"ESB Networks","type":"Organisation","sector":"Energy","issues":["Grid connections","Regulatory complexity","Funding/investment","Delivery timelines"],"position":"Conditional support","summary":"Full submission attached; grid investment and reform critical","url":"https://assets.gov.ie/static/documents/34cd8b84/Public_Consultation_on_Accelerating_Infrastructure_Submission_89.pdf","has_further_info":true},{"n":90,"org":"EDF Renewables Ireland","type":"Organisation","sector":"Energy","issues":["Planning delays","Grid connections","Delivery timelines","Regulatory complexity"],"position":"Raising concerns","summary":"Ireland slowest in Europe for electricity project lifecycles","url":"https://assets.gov.ie/static/documents/f88bb906/Public_Consultation_on_Accelerating_Infrastructure_Submission_90.pdf","has_further_info":true},{"n":91,"org":"Southern Regional Assembly","type":"Organisation","sector":"Local Government","issues":["Agency coordination","Funding/investment","Planning delays","Delivery timelines"],"position":"Conditional support","summary":"Must align with Project Ireland 2040; regional priorities matter","url":"https://assets.gov.ie/static/documents/4c526b23/Public_Consultation_on_Accelerating_Infrastructure_Submission_91.pdf","has_further_info":true},{"n":92,"org":"Individual (Finance)","type":"Individual","sector":"Individual/Citizen","issues":["Procurement","Agency coordination","Capacity/skills","Delivery timelines"],"position":"Raising concerns","summary":"Government/semi-state failures in contract management","url":"https://assets.gov.ie/static/documents/91e69aba/Public_Consultation_on_Accelerating_Infrastructure_Submission_92.pdf","has_further_info":false},{"n":93,"org":"Telecommunications Industry Ireland","type":"Organisation","sector":"Business/Industry","issues":["Planning delays","Regulatory complexity","Grid connections","Delivery timelines"],"position":"Conditional support","summary":"Telecoms omitted from scope; should be designated strategic infrastructure","url":"https://assets.gov.ie/static/documents/b5ca1b0d/Public_Consultation_on_Accelerating_Infrastructure_Submission_93.pdf","has_further_info":false},{"n":94,"org":"BnM","type":"Organisation","sector":"Construction/Development","issues":["Planning delays","Funding/investment","Delivery timelines","Housing delivery"],"position":"Conditional support","summary":"Growth welcome; planning reform essential to keep pace","url":"https://assets.gov.ie/static/documents/6b5d7326/Public_Consultation_on_Accelerating_Infrastructure_Submission_94.pdf","has_further_info":true},{"n":95,"org":"Northwest Regional Enterprise Plan (sub. 95)","type":"Organisation","sector":"Local Government","issues":["Funding/investment","Delivery timelines","Agency coordination","Planning delays"],"position":"Raising concerns","summary":"Northwest underserved; duplicate submission","url":"https://assets.gov.ie/static/documents/9286f96c/Public_Consultation_on_Accelerating_Infrastructure_Submission_95.pdf","has_further_info":true},{"n":96,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines"],"position":"Raising concerns","summary":"Minimal submission","url":"https://assets.gov.ie/static/documents/7f64fb59/Public_Consultation_on_Accelerating_Infrastructure_Submission_96.pdf","has_further_info":false},{"n":97,"org":"Anonymous organisation","type":"Organisation","sector":"Other","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Systemic barriers","url":"https://assets.gov.ie/static/documents/262a3477/Public_Consultation_on_Accelerating_Infrastructure_Submission_97.pdf","has_further_info":false},{"n":98,"org":"Anonymous organisation","type":"Organisation","sector":"Other","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Systemic reform needed","url":"https://assets.gov.ie/static/documents/e27a6e4e/Public_Consultation_on_Accelerating_Infrastructure_Submission_98.pdf","has_further_info":false},{"n":99,"org":"BAM Ireland","type":"Organisation","sector":"Construction/Development","issues":["Planning delays","Procurement","Capacity/skills","Delivery timelines"],"position":"Conditional support","summary":"Strategic intent improved but practical delivery hindered by complexity","url":"https://assets.gov.ie/static/documents/6c20775a/Public_Consultation_on_Accelerating_Infrastructure_Submission_99.pdf","has_further_info":true},{"n":100,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Agency coordination","Regulatory complexity","Delivery timelines"],"position":"Raising concerns","summary":"Too many quangos with no sense of urgency; leadership failures","url":"https://assets.gov.ie/static/documents/5302a1d3/Public_Consultation_on_Accelerating_Infrastructure_Submission_100.pdf","has_further_info":false},{"n":101,"org":"Arup","type":"Organisation","sector":"Professional Services","issues":["Planning delays","Delivery timelines","Capacity/skills","Agency coordination"],"position":"Conditional support","summary":"Infrastructure deficit growing; competitiveness at stake","url":"https://assets.gov.ie/static/documents/6207dc52/Public_Consultation_on_Accelerating_Infrastructure_Submission_101.pdf","has_further_info":false},{"n":102,"org":"Towercom","type":"Organisation","sector":"Business/Industry","issues":["Regulatory complexity","Planning delays","Delivery timelines","Grid connections"],"position":"Conditional support","summary":"Telecoms infrastructure requires proportionate treatment","url":"https://assets.gov.ie/static/documents/efd36cf2/Public_Consultation_on_Accelerating_Infrastructure_Submission_102.pdf","has_further_info":false},{"n":103,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Delivery system too slow","url":"https://assets.gov.ie/static/documents/74e863c1/Public_Consultation_on_Accelerating_Infrastructure_Submission_103.pdf","has_further_info":false},{"n":104,"org":"Individual (Construction)","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Capacity/skills","Delivery timelines"],"position":"Conditional support","summary":"Ireland delivers well once started; getting started is the problem","url":"https://assets.gov.ie/static/documents/3798df98/Public_Consultation_on_Accelerating_Infrastructure_Submission_104.pdf","has_further_info":false},{"n":105,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Environmental assessment","Planning delays","Legal reform"],"position":"Raising concerns","summary":"EIAR process excessive; up to 7500 pages for wind farms","url":"https://assets.gov.ie/static/documents/b493be5b/Public_Consultation_on_Accelerating_Infrastructure_Submission_105.pdf","has_further_info":false},{"n":106,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Legal reform","Procurement","Regulatory complexity","Delivery timelines"],"position":"Raising concerns","summary":"Legislative fettering and poor risk allocation key barriers","url":"https://assets.gov.ie/static/documents/81085200/Public_Consultation_on_Accelerating_Infrastructure_Submission_106.pdf","has_further_info":false},{"n":107,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Agency coordination","Planning delays","Delivery timelines"],"position":"Conditional support","summary":"Needs more coordinated national planning for linear infrastructure","url":"https://assets.gov.ie/static/documents/d3e57ef1/Public_Consultation_on_Accelerating_Infrastructure_Submission_107.pdf","has_further_info":false},{"n":108,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Systemic delays","url":"https://assets.gov.ie/static/documents/d24cc00c/Public_Consultation_on_Accelerating_Infrastructure_Submission_108.pdf","has_further_info":false},{"n":109,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Legal reform","Public consultation","Environmental assessment","Planning delays"],"position":"Mixed","summary":"System created to protect rights has become barrier to delivery","url":"https://assets.gov.ie/static/documents/2a3866e7/Public_Consultation_on_Accelerating_Infrastructure_Submission_109.pdf","has_further_info":false},{"n":110,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Housing delivery","Regulatory complexity","Delivery timelines"],"position":"Raising concerns","summary":"Infrastructure deficit: housing, competitiveness, quality of life","url":"https://assets.gov.ie/static/documents/2ae3052d/Public_Consultation_on_Accelerating_Infrastructure_Submission_110.pdf","has_further_info":false},{"n":111,"org":"Individual (Planner)","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Capacity/skills","Legal reform","Regulatory complexity"],"position":"Raising concerns","summary":"Planning system focus; over-litigated over last 10-15 years","url":"https://assets.gov.ie/static/documents/e5413ce0/Public_Consultation_on_Accelerating_Infrastructure_Submission_111.pdf","has_further_info":false},{"n":112,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Delivery barriers across all sectors","url":"https://assets.gov.ie/static/documents/ecd97f30/Public_Consultation_on_Accelerating_Infrastructure_Submission_112.pdf","has_further_info":false},{"n":113,"org":"Cork Chamber","type":"Organisation","sector":"Business/Industry","issues":["Planning delays","Delivery timelines","Investor confidence","Agency coordination"],"position":"Raising concerns","summary":"Large projects take far longer in Ireland than comparable countries","url":"https://assets.gov.ie/static/documents/b5e09039/Public_Consultation_on_Accelerating_Infrastructure_Submission_113.pdf","has_further_info":true},{"n":114,"org":"FuturEnergy Ireland","type":"Organisation","sector":"Energy","issues":["Planning delays","Legal reform","Environmental assessment","Delivery timelines"],"position":"Raising concerns","summary":"Delivery extremely slow; permitting timelines and legal challenges","url":"https://assets.gov.ie/static/documents/34ab4354/Public_Consultation_on_Accelerating_Infrastructure_Submission_114.pdf","has_further_info":false},{"n":115,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Environmental assessment","Planning delays","Legal reform"],"position":"Raising concerns","summary":"EIAR process absurdly long for wind farms","url":"https://assets.gov.ie/static/documents/62e28ed2/Public_Consultation_on_Accelerating_Infrastructure_Submission_115.pdf","has_further_info":false},{"n":116,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Legal reform","Delivery timelines"],"position":"Raising concerns","summary":"Large critical projects take far too long","url":"https://assets.gov.ie/static/documents/96a0957d/Public_Consultation_on_Accelerating_Infrastructure_Submission_116.pdf","has_further_info":false},{"n":117,"org":"Midleton & East Cork Flood Group","type":"Organisation","sector":"Community/Residents","issues":["Delivery timelines","Funding/investment","Agency coordination","Planning delays"],"position":"Raising concerns","summary":"Flood relief delayed for years; community urgently affected","url":"https://assets.gov.ie/static/documents/747973d4/Public_Consultation_on_Accelerating_Infrastructure_Submission_117.pdf","has_further_info":true},{"n":118,"org":"Cork City Council","type":"Organisation","sector":"Local Government","issues":["Agency coordination","Planning delays","Funding/investment","Delivery timelines"],"position":"Conditional support","summary":"Full submission attached; coordination and funding key","url":"https://assets.gov.ie/static/documents/ac8fa02d/Public_Consultation_on_Accelerating_Infrastructure_Submission_118.pdf","has_further_info":true},{"n":119,"org":"Ecocem Ireland","type":"Organisation","sector":"Construction/Development","issues":["Planning delays","Delivery timelines","Climate/sustainability","Regulatory complexity"],"position":"Conditional support","summary":"Significant deficit after decade of under-investment","url":"https://assets.gov.ie/static/documents/f5ba7d73/Public_Consultation_on_Accelerating_Infrastructure_Submission_119.pdf","has_further_info":true},{"n":120,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines","Agency coordination"],"position":"Raising concerns","summary":"Too many barriers; cites Shannon crossing as example","url":"https://assets.gov.ie/static/documents/be86381c/Public_Consultation_on_Accelerating_Infrastructure_Submission_120.pdf","has_further_info":false},{"n":121,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Very poor; long-term planning without delivery","url":"https://assets.gov.ie/static/documents/663946f3/Public_Consultation_on_Accelerating_Infrastructure_Submission_121.pdf","has_further_info":false},{"n":122,"org":"Flotation Energy","type":"Organisation","sector":"Energy","issues":["Grid connections","Planning delays","Regulatory complexity","Investor confidence"],"position":"Raising concerns","summary":"Offshore energy blocked by grid and planning constraints","url":"https://assets.gov.ie/static/documents/9dc5a3b2/Public_Consultation_on_Accelerating_Infrastructure_Submission_122.pdf","has_further_info":false},{"n":123,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Delivery system fundamentally broken","url":"https://assets.gov.ie/static/documents/aa82d5fe/Public_Consultation_on_Accelerating_Infrastructure_Submission_123.pdf","has_further_info":false},{"n":124,"org":"Irish Climate Science Forum (sub. 124)","type":"Organisation","sector":"Environmental/NGO","issues":["Climate/sustainability","Regulatory complexity","Environmental assessment","Planning delays"],"position":"Mixed","summary":"Concerned infrastructure driven by green ideology over engineering","url":"https://assets.gov.ie/static/documents/8f8f10d8/Public_Consultation_on_Accelerating_Infrastructure_Submission_124.pdf","has_further_info":true},{"n":125,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Environmental assessment","Legal reform","Planning delays"],"position":"Raising concerns","summary":"Environmental process disproportionate","url":"https://assets.gov.ie/static/documents/df4c8a0e/Public_Consultation_on_Accelerating_Infrastructure_Submission_125.pdf","has_further_info":false},{"n":126,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Systemic barriers","url":"https://assets.gov.ie/static/documents/583970f4/Public_Consultation_on_Accelerating_Infrastructure_Submission_126.pdf","has_further_info":false},{"n":127,"org":"S2S Sutton to Sandycove","type":"Organisation","sector":"Community/Residents","issues":["Agency coordination","Planning delays","Public consultation","Community engagement"],"position":"Conditional support","summary":"Cycleway blocked by coordination failures between multiple bodies","url":"https://assets.gov.ie/static/documents/3fce87a0/Public_Consultation_on_Accelerating_Infrastructure_Submission_127.pdf","has_further_info":true},{"n":128,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Infrastructure too slow","url":"https://assets.gov.ie/static/documents/900accd4/Public_Consultation_on_Accelerating_Infrastructure_Submission_128.pdf","has_further_info":false},{"n":129,"org":"SSE","type":"Organisation","sector":"Energy","issues":["Grid connections","Planning delays","Legal reform","Regulatory complexity"],"position":"Conditional support","summary":"Full submission attached; energy delivery barriers critical","url":"https://assets.gov.ie/static/documents/3fd0a2a9/Public_Consultation_on_Accelerating_Infrastructure_Submission_129.pdf","has_further_info":false},{"n":130,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Funding/investment","Agency coordination","Delivery timelines"],"position":"Raising concerns","summary":"Government Dublin-centric; sporadic and reactive","url":"https://assets.gov.ie/static/documents/c1ba8344/Public_Consultation_on_Accelerating_Infrastructure_Submission_130.pdf","has_further_info":false},{"n":131,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Barriers preventing delivery","url":"https://assets.gov.ie/static/documents/9afafaaf/Public_Consultation_on_Accelerating_Infrastructure_Submission_131.pdf","has_further_info":false},{"n":132,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Funding/investment","Capacity/skills"],"position":"Raising concerns","summary":"Incredibly slow, over budget, poor accountability","url":"https://assets.gov.ie/static/documents/abd63e4c/Public_Consultation_on_Accelerating_Infrastructure_Submission_132.pdf","has_further_info":false},{"n":133,"org":"Orsted (Codling Wind Park)","type":"Organisation","sector":"Energy","issues":["Planning delays","Capacity/skills","Regulatory complexity","Delivery timelines"],"position":"Raising concerns","summary":"Planning biggest barrier; resourcing bodies critical","url":"https://assets.gov.ie/static/documents/2aebbedc/Public_Consultation_on_Accelerating_Infrastructure_Submission_133.pdf","has_further_info":true},{"n":135,"org":"Eastern & Midland Regional Assembly","type":"Organisation","sector":"Local Government","issues":["Agency coordination","Funding/investment","Planning delays","Delivery timelines"],"position":"Conditional support","summary":"Full submission attached; regional coordination needed","url":"https://assets.gov.ie/static/documents/0eb595fd/Public_Consultation_on_Accelerating_Infrastructure_Submission_135.pdf","has_further_info":true},{"n":136,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Clear delays at all planning stages","url":"https://assets.gov.ie/static/documents/d4091055/Public_Consultation_on_Accelerating_Infrastructure_Submission_136.pdf","has_further_info":false},{"n":137,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Systemic barriers","url":"https://assets.gov.ie/static/documents/a399c40a/Public_Consultation_on_Accelerating_Infrastructure_Submission_137.pdf","has_further_info":false},{"n":138,"org":"Blue Dot Consulting","type":"Organisation","sector":"Professional Services","issues":["Climate/sustainability","Planning delays","Regulatory complexity","Delivery timelines"],"position":"Conditional support","summary":"Energy transition commitments undermined by delivery barriers","url":"https://assets.gov.ie/static/documents/6e3d4afc/Public_Consultation_on_Accelerating_Infrastructure_Submission_138.pdf","has_further_info":false},{"n":139,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Systemic reform needed","url":"https://assets.gov.ie/static/documents/fbe39cc9/Public_Consultation_on_Accelerating_Infrastructure_Submission_139.pdf","has_further_info":false},{"n":140,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Regulatory complexity","Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Too slow; blocked by red tape","url":"https://assets.gov.ie/static/documents/1f3ea4e5/Public_Consultation_on_Accelerating_Infrastructure_Submission_140.pdf","has_further_info":false},{"n":141,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays","Agency coordination"],"position":"Raising concerns","summary":"Very poor delivery; systemic failure","url":"https://assets.gov.ie/static/documents/09c5dd7f/Public_Consultation_on_Accelerating_Infrastructure_Submission_141.pdf","has_further_info":false},{"n":142,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Barriers across all sectors","url":"https://assets.gov.ie/static/documents/55d6625d/Public_Consultation_on_Accelerating_Infrastructure_Submission_142.pdf","has_further_info":false},{"n":143,"org":"Individual (Finance)","type":"Individual","sector":"Individual/Citizen","issues":["Funding/investment","Procurement","Investor confidence","Regulatory complexity"],"position":"Conditional support","summary":"Infrastructure finance background; urges private capital models","url":"https://assets.gov.ie/static/documents/7ff72bde/Public_Consultation_on_Accelerating_Infrastructure_Submission_143.pdf","has_further_info":false},{"n":144,"org":"American Chamber of Commerce","type":"Organisation","sector":"Business/Industry","issues":["Grid connections","Planning delays","Investor confidence","Regulatory complexity"],"position":"Raising concerns","summary":"FDI at risk; grid and planning blocking US investment","url":"https://assets.gov.ie/static/documents/6fb8dbeb/Public_Consultation_on_Accelerating_Infrastructure_Submission_144.pdf","has_further_info":true},{"n":145,"org":"Galway Harbour Company","type":"Organisation","sector":"Transport","issues":["Planning delays","Funding/investment","Land/CPO","Delivery timelines"],"position":"Raising concerns","summary":"Unsuccessful except motorways; systemic reform essential","url":"https://assets.gov.ie/static/documents/b6ec52d3/Public_Consultation_on_Accelerating_Infrastructure_Submission_145.pdf","has_further_info":false},{"n":146,"org":"University College Cork","type":"Organisation","sector":"Academia","issues":["Capacity/skills","Agency coordination","Climate/sustainability","Planning delays"],"position":"Conditional support","summary":"Academic perspective; skills and coordination key constraints","url":"https://assets.gov.ie/static/documents/3d8a5f0e/Public_Consultation_on_Accelerating_Infrastructure_Submission_146.pdf","has_further_info":false},{"n":147,"org":"Individual (Procurement)","type":"Individual","sector":"Individual/Citizen","issues":["Procurement","Capacity/skills","Agency coordination","Delivery timelines"],"position":"Raising concerns","summary":"State agency procurement and project management failures","url":"https://assets.gov.ie/static/documents/fd8f8777/Public_Consultation_on_Accelerating_Infrastructure_Submission_147.pdf","has_further_info":false},{"n":148,"org":"Mott MacDonald","type":"Organisation","sector":"Professional Services","issues":["Planning delays","Delivery timelines","Capacity/skills","Procurement"],"position":"Conditional support","summary":"Projects too long due to multiple barriers; cost inflation rising","url":"https://assets.gov.ie/static/documents/f396621a/Public_Consultation_on_Accelerating_Infrastructure_Submission_148.pdf","has_further_info":false},{"n":149,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Housing delivery","Delivery timelines"],"position":"Raising concerns","summary":"Planning timescales having significant housing impact","url":"https://assets.gov.ie/static/documents/6cbb3869/Public_Consultation_on_Accelerating_Infrastructure_Submission_149.pdf","has_further_info":false},{"n":150,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Barriers across all sectors","url":"https://assets.gov.ie/static/documents/9bb4a61f/Public_Consultation_on_Accelerating_Infrastructure_Submission_150.pdf","has_further_info":false},{"n":151,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Infrastructure delivery failing","url":"https://assets.gov.ie/static/documents/856f1770/Public_Consultation_on_Accelerating_Infrastructure_Submission_151.pdf","has_further_info":false},{"n":152,"org":"ECO Wind Cluster","type":"Organisation","sector":"Energy","issues":["Grid connections","Planning delays","Regulatory complexity","Investor confidence"],"position":"Conditional support","summary":"East coast offshore wind; grid and planning critical barriers","url":"https://assets.gov.ie/static/documents/fd4d083b/Public_Consultation_on_Accelerating_Infrastructure_Submission_152.pdf","has_further_info":true},{"n":153,"org":"Homebuyer's Hero","type":"Organisation","sector":"Community/Residents","issues":["Housing delivery","Planning delays","Funding/investment","Delivery timelines"],"position":"Raising concerns","summary":"Failing; must define infrastructure as national priority","url":"https://assets.gov.ie/static/documents/36c96457/Public_Consultation_on_Accelerating_Infrastructure_Submission_153.pdf","has_further_info":false},{"n":154,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Funding/investment"],"position":"Raising concerns","summary":"Midleton flood relief urgently needed; delay after delay","url":"https://assets.gov.ie/static/documents/ae936af7/Public_Consultation_on_Accelerating_Infrastructure_Submission_154.pdf","has_further_info":false},{"n":155,"org":"Irish Climate Science Forum (sub. 155)","type":"Organisation","sector":"Environmental/NGO","issues":["Climate/sustainability","Regulatory complexity","Planning delays","Environmental assessment"],"position":"Mixed","summary":"Lacks rational objectives since financial crash","url":"https://assets.gov.ie/static/documents/3ef15d44/Public_Consultation_on_Accelerating_Infrastructure_Submission_155.pdf","has_further_info":true},{"n":156,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines","Capacity/skills"],"position":"Conditional support","summary":"Deliver excellent infrastructure once started; starting is problem","url":"https://assets.gov.ie/static/documents/9dca87f7/Public_Consultation_on_Accelerating_Infrastructure_Submission_156.pdf","has_further_info":false},{"n":157,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"System barriers","url":"https://assets.gov.ie/static/documents/c11d67d4/Public_Consultation_on_Accelerating_Infrastructure_Submission_157.pdf","has_further_info":false},{"n":158,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Capacity/skills","Agency coordination","Regulatory complexity"],"position":"Raising concerns","summary":"Civil servants not up to tasks compared to EU peers","url":"https://assets.gov.ie/static/documents/25710494/Public_Consultation_on_Accelerating_Infrastructure_Submission_158.pdf","has_further_info":false},{"n":159,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Environmental assessment","Planning delays","Climate/sustainability"],"position":"Mixed","summary":"Disappointed energy and water inefficiencies not addressed","url":"https://assets.gov.ie/static/documents/4785cf1d/Public_Consultation_on_Accelerating_Infrastructure_Submission_159.pdf","has_further_info":false},{"n":160,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Delivery timelines"],"position":"Raising concerns","summary":"Delivery barriers unacceptable","url":"https://assets.gov.ie/static/documents/72fee58b/Public_Consultation_on_Accelerating_Infrastructure_Submission_160.pdf","has_further_info":false},{"n":161,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Housing delivery","Agency coordination","Planning delays"],"position":"Raising concerns","summary":"Infrastructure must precede development, not follow it","url":"https://assets.gov.ie/static/documents/d30a1248/Public_Consultation_on_Accelerating_Infrastructure_Submission_161.pdf","has_further_info":false},{"n":162,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Systemic barriers","url":"https://assets.gov.ie/static/documents/058ffef3/Public_Consultation_on_Accelerating_Infrastructure_Submission_162.pdf","has_further_info":false},{"n":163,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Planning delays","Regulatory complexity","Agency coordination","Delivery timelines"],"position":"Conditional support","summary":"Improved recently but excessive timelines and fragmented governance","url":"https://assets.gov.ie/static/documents/08a4a479/Public_Consultation_on_Accelerating_Infrastructure_Submission_163.pdf","has_further_info":false},{"n":164,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Barriers across all infrastructure types","url":"https://assets.gov.ie/static/documents/0f019376/Public_Consultation_on_Accelerating_Infrastructure_Submission_164.pdf","has_further_info":false},{"n":165,"org":"Anonymous organisation","type":"Organisation","sector":"Other","issues":["Public consultation","Community engagement","Planning delays"],"position":"Mixed","summary":"Public challenge when not in personal interest","url":"https://assets.gov.ie/static/documents/ac59bc08/Public_Consultation_on_Accelerating_Infrastructure_Submission_165.pdf","has_further_info":false},{"n":166,"org":"Individual respondent","type":"Individual","sector":"Individual/Citizen","issues":["Delivery timelines","Planning delays"],"position":"Raising concerns","summary":"Infrastructure delivery failing","url":"https://assets.gov.ie/static/documents/66e09192/Public_Consultation_on_Accelerating_Infrastructure_Submission_166.pdf","has_further_info":false}];
 
-const SCOL={
-  Energy:"#22d3a5",Transport:"#60a5fa","Local Government":"#a78bfa",
-  "Professional Services":"#fb923c","Construction/Development":"#f472b6",
-  "Business/Industry":"#38bdf8","Environmental/NGO":"#86efac",
-  "Community/Residents":"#fde68a","Water/Utilities":"#67e8f9",
-  Academia:"#d1d5db","Individual/Citizen":"#94a3b8",Other:"#475569"
+const SC={
+  Energy:"#1de9b6",Transport:"#4d9fff","Local Government":"#9b7fff",
+  "Professional Services":"#ff8c42","Construction/Development":"#ff6eb0",
+  "Business/Industry":"#42d4f4","Environmental/NGO":"#5fff9b",
+  "Community/Residents":"#ffe066","Water/Utilities":"#67e8f9",
+  Academia:"#c4cdd6","Individual/Citizen":"#5a7a96",Other:"#2a3d52"
 };
+const S=["Individual/Citizen","Professional Services","Energy","Business/Industry","Local Government","Construction/Development","Transport","Environmental/NGO","Community/Residents","Water/Utilities","Academia","Other"];
 
-const SECTORS=[
-  "Individual/Citizen","Professional Services","Energy","Business/Industry",
-  "Local Government","Construction/Development","Transport","Environmental/NGO",
-  "Community/Residents","Water/Utilities","Academia","Other"
-];
+let af="all",sc=null,sd=1,st="";
 
-let activeFilter="all";
-let sortCol=null;
-let sortDir=1;
-let searchTerm="";
+function gf(){return ALL.filter(r=>{
+  if(af==="Organisation"&&r.type!=="Organisation") return false;
+  if(af==="Individual"&&r.type!=="Individual") return false;
+  if(S.includes(af)&&r.sector!==af) return false;
+  return true;
+});}
 
-function getFiltered(){
-  return ALL.filter(r=>{
-    if(activeFilter==="Organisation"&&r.type!=="Organisation") return false;
-    if(activeFilter==="Individual"&&r.type!=="Individual") return false;
-    if(SECTORS.includes(activeFilter)&&r.sector!==activeFilter) return false;
-    return true;
-  });
-}
-
-function pct(n,d){return d>0?Math.round(n/d*100):0;}
+function p(n,d){return d>0?Math.round(n/d*100):0;}
 
 function render(){
-  const d=getFiltered();
-  const total=d.length;
-
-  // Header
-  document.getElementById("hdrTotal").textContent=total;
+  const d=gf(),t=d.length;
+  document.getElementById("hdrN").textContent=t;
   let lab="All submissions";
-  if(activeFilter==="Organisation") lab="Organisations only";
-  else if(activeFilter==="Individual") lab="Individuals only";
-  else if(SECTORS.includes(activeFilter)) lab=activeFilter;
+  if(af==="Organisation") lab="Organisations only";
+  else if(af==="Individual") lab="Individuals only";
+  else if(S.includes(af)) lab=af;
   document.getElementById("activeLabel").textContent=lab;
 
-  // Counts
   const orgs=d.filter(r=>r.type==="Organisation");
   const indivs=d.filter(r=>r.type==="Individual");
-  const namedOrgs=orgs.filter(r=>!r.org.startsWith("Anonymous"));
-  const anonOrgs=orgs.filter(r=>r.org.startsWith("Anonymous"));
-  const withFI=d.filter(r=>r.has_further_info);
-  const orgFI=orgs.filter(r=>r.has_further_info);
-  const indivFI=indivs.filter(r=>r.has_further_info);
+  const nOrgs=orgs.filter(r=>!r.org.startsWith("Anonymous"));
+  const aOrgs=orgs.filter(r=>r.org.startsWith("Anonymous"));
+  const oFI=orgs.filter(r=>r.has_further_info);
+  const iFI=indivs.filter(r=>r.has_further_info);
+  const allFI=d.filter(r=>r.has_further_info);
+  const nI=indivs.filter(r=>!r.org.startsWith("Individual respondent"));
+  const saAll={},sa={};
+  ALL.forEach(r=>saAll[r.sector]=(saAll[r.sector]||0)+1);
+  d.forEach(r=>sa[r.sector]=(sa[r.sector]||0)+1);
+  const maxS=Math.max(...Object.values(saAll));
 
-  const secCountsAll={};
-  ALL.forEach(r=>secCountsAll[r.sector]=(secCountsAll[r.sector]||0)+1);
-  const secCounts={};
-  d.forEach(r=>secCounts[r.sector]=(secCounts[r.sector]||0)+1);
-  const maxSecAll=Math.max(...Object.values(secCountsAll));
+  // Contrast
+  document.getElementById("cpOrg").textContent=orgs.length>0?p(oFI.length,orgs.length)+"%":"—";
+  document.getElementById("csOrg").textContent=`${oFI.length} of ${orgs.length} organisation submissions`;
+  document.getElementById("cpIndiv").textContent=indivs.length>0?p(iFI.length,indivs.length)+"%":"—";
+  document.getElementById("csIndiv").textContent=`${iFI.length} of ${indivs.length} individual submissions`;
 
-  // KPIs - update dynamic ones
-  document.getElementById("kpiTotal").textContent=total;
-  document.getElementById("kpiOrgs").textContent=orgs.length;
-  document.getElementById("kpiOrgsSub").textContent=`${pct(orgs.length,total)}% of total · ${namedOrgs.length} named`;
-  document.getElementById("kpiIndivs").textContent=indivs.length;
-  document.getElementById("kpiIndivsSub").textContent=`${pct(indivs.length,total)}% of total`;
-  document.getElementById("kpiFIOrg").textContent=orgs.length>0?`${pct(orgFI.length,orgs.length)}%`:"—";
-  document.getElementById("kpiFIOrgSub").textContent=`${orgFI.length} of ${orgs.length} submissions`;
-  document.getElementById("kpiFIIndiv").textContent=indivs.length>0?`${pct(indivFI.length,indivs.length)}%`:"—";
-  document.getElementById("kpiFIIndivSub").textContent=`${indivFI.length} of ${indivs.length} submissions`;
+  // KPIs
+  document.getElementById("kN").textContent=t;
+  document.getElementById("kO").textContent=orgs.length;
+  document.getElementById("kOS").textContent=`${p(orgs.length,t)}% · ${nOrgs.length} named`;
+  document.getElementById("kI").textContent=indivs.length;
+  document.getElementById("kIS").textContent=`${p(indivs.length,t)}% of total`;
 
-  // TYPE BREAKDOWN
-  const namedIndivs=indivs.filter(r=>!r.org.startsWith("Individual respondent"));
+  // Type breakdown
   document.getElementById("typeBreakdown").innerHTML=`
     <div class="type-block">
-      <div class="type-header"><span class="type-name">Organisations</span><span class="type-count">${orgs.length}</span></div>
-      <div class="type-track">
-        <div class="type-fill" style="width:${pct(namedOrgs.length,total)}%;background:#60a5fa"></div>
-        <div class="type-fill" style="width:${pct(anonOrgs.length,total)}%;background:#60a5fa;opacity:0.25"></div>
+      <div class="type-hdr"><span class="type-name">Organisations</span><span class="type-count">${orgs.length}</span></div>
+      <div class="track">
+        <div class="fill" style="width:${p(nOrgs.length,t)}%;background:#4d9fff"></div>
+        <div class="fill" style="width:${p(aOrgs.length,t)}%;background:#4d9fff;opacity:0.18"></div>
       </div>
-      <div class="type-sub">${namedOrgs.length} named · ${anonOrgs.length} anonymous</div>
+      <div class="type-sub">${nOrgs.length} named · ${aOrgs.length} anonymous</div>
     </div>
-    <div class="type-block">
-      <div class="type-header"><span class="type-name">Individuals</span><span class="type-count">${indivs.length}</span></div>
-      <div class="type-track">
-        <div class="type-fill" style="width:${pct(namedIndivs.length,total)}%;background:#94a3b8"></div>
-        <div class="type-fill" style="width:${pct(indivs.length-namedIndivs.length,total)}%;background:#94a3b8;opacity:0.25"></div>
+    <div class="type-block" style="margin-top:10px">
+      <div class="type-hdr"><span class="type-name">Individuals</span><span class="type-count">${indivs.length}</span></div>
+      <div class="track">
+        <div class="fill" style="width:${p(nI.length,t)}%;background:#5a7a96"></div>
+        <div class="fill" style="width:${p(indivs.length-nI.length,t)}%;background:#5a7a96;opacity:0.18"></div>
       </div>
-      <div class="type-sub">${namedIndivs.length} identified by role · ${indivs.length-namedIndivs.length} anonymous</div>
+      <div class="type-sub">${nI.length} identified by role · ${indivs.length-nI.length} anonymous</div>
     </div>
-    <hr class="divider">
+    <hr class="hr">
     <div class="type-block">
-      <div class="type-header"><span class="type-name" style="font-size:11px">Submitted further information</span><span class="type-count">${withFI.length} of ${total}</span></div>
-      <div class="type-track">
-        <div class="type-fill" style="width:${pct(withFI.length,total)}%;background:#22d3a5"></div>
-        <div class="type-fill" style="width:${pct(total-withFI.length,total)}%;background:#1a2540"></div>
+      <div class="type-hdr"><span class="type-name" style="font-size:11px">Submitted further information</span><span class="type-count">${allFI.length} of ${t}</span></div>
+      <div class="track">
+        <div class="fill" style="width:${p(allFI.length,t)}%;background:#1de9b6"></div>
+        <div class="fill" style="width:${p(t-allFI.length,t)}%;background:#16202e"></div>
       </div>
-      <div class="type-sub">${withFI.length} with detailed document · ${total-withFI.length} form response only</div>
+      <div class="type-sub">${allFI.length} with detailed document · ${t-allFI.length} form only</div>
     </div>`;
 
-  // SECTOR GRID
-  document.getElementById("sectorGrid").innerHTML=SECTORS.filter(s=>secCountsAll[s]).map(s=>{
-    const cnt=secCounts[s]||0;
-    const base=secCountsAll[s];
-    const isAct=activeFilter===s;
-    const isDim=activeFilter!=="all"&&cnt===0;
-    const fiCnt=d.filter(r=>r.sector===s&&r.has_further_info).length;
-    return `<div class="sec-cell${isAct?" act":""}${isDim?" dim":""}"
-      data-sec="${encodeURIComponent(s)}" style="--sc:${SCOL[s]}">
-      ${fiCnt>0?`<span class="sec-fi">◆${fiCnt}</span>`:""}
-      <div class="sec-count" style="color:${SCOL[s]}">${cnt}</div>
-      <div class="sec-name">${s.replace("/Citizen","").replace("/NGO","").replace("/Development","").replace("/Industry","")}</div>
-      <div class="sec-bar-wrap"><div class="sec-bar-fill" style="width:${base/maxSecAll*100}%;background:${SCOL[s]}"></div></div>
-    </div>`;
-  }).join("");
-  document.getElementById("sectorGrid").querySelectorAll(".sec-cell").forEach(c=>
-    c.onclick=()=>setFilter(decodeURIComponent(c.dataset.sec))
-  );
-
-  // PARTICIPATION GAP
-  const maxTotal=Math.max(...SECTORS.map(s=>secCountsAll[s]||0));
-  document.getElementById("gapChart").innerHTML=SECTORS.filter(s=>secCountsAll[s]).map(s=>{
-    const sTotal=secCounts[s]||0;
+  // Sector grid
+  document.getElementById("sgrid").innerHTML=S.filter(s=>saAll[s]).map(s=>{
+    const cnt=sa[s]||0,base=saAll[s];
+    const isA=af===s,isD=af!=="all"&&cnt===0;
     const fi=d.filter(r=>r.sector===s&&r.has_further_info).length;
-    const nofi=sTotal-fi;
-    const isDim=sTotal===0;
-    const trackW=secCountsAll[s]/maxTotal*100;
-    const sName=s.replace("/Citizen","").replace("/NGO","").replace("/Development","").replace("/Industry","");
-    return `<div class="gap-row">
-      <div class="gap-sector-label${isDim?" dim":""}">${sName}</div>
-      <div class="gap-track" style="--w:${trackW}%">
-        ${fi>0?`<div class="gap-seg" style="flex:${fi};background:${SCOL[s]};opacity:0.8">
-          <span class="gap-seg-text">${fi}</span></div>`:""}
-        ${nofi>0?`<div class="gap-seg" style="flex:${nofi};background:#1a2540">
-          <span class="gap-seg-text" style="color:#334155">${nofi}</span></div>`:""}
-        ${sTotal===0?`<div style="flex:1;height:100%;background:#0d1525;border-radius:3px"></div>`:""}
-      </div>
-      <div class="gap-total">${sTotal||"—"}</div>
+    return `<div class="sc${isA?" act":""}${isD?" dim":""}" data-s="${encodeURIComponent(s)}" style="--c:${SC[s]}">
+      ${fi>0?`<span class="sc-fi">◆${fi}</span>`:""}
+      <div class="sc-n" style="color:${SC[s]}">${cnt}</div>
+      <div class="sc-name">${s.replace("/Citizen","").replace("/NGO","").replace("/Development","").replace("/Industry","")}</div>
+      <div class="sc-bar"><div class="sc-fill" style="width:${base/maxS*100}%;background:${SC[s]}"></div></div>
     </div>`;
   }).join("");
+  document.getElementById("sgrid").querySelectorAll(".sc").forEach(c=>c.onclick=()=>setF(decodeURIComponent(c.dataset.s)));
+
+  // Gap chart
+  const mx=Math.max(...S.map(s=>saAll[s]||0));
+  // Gap chart — full width bars, each split by FI proportion
+  // Shows engagement DEPTH per sector, not absolute volume
+  document.getElementById("gapChart").innerHTML=S.filter(s=>saAll[s]).map(s=>{
+    const sT=sa[s]||0,fi=d.filter(r=>r.sector===s&&r.has_further_info).length,nf=sT-fi;
+    const fiPct=sT>0?fi/sT*100:0;
+    const nfPct=sT>0?nf/sT*100:0;
+    const nm=s.replace("/Citizen","").replace("/NGO","").replace("/Development","").replace("/Industry","");
+    const fiLabel=fi>0?`${fi} (${Math.round(fiPct)}%)`:"";
+    return `<div class="gap-row">
+      <div class="gap-lbl${sT===0?" dim":""}">${nm}</div>
+      <div class="gap-track" style="flex:1">
+        ${fi>0?`<div class="gap-seg" style="width:${fiPct}%;background:${SC[s]};opacity:0.8"><span class="gap-seg-t">${fiLabel}</span></div>`:""}
+        ${nf>0?`<div class="gap-seg" style="width:${nfPct}%;background:#141e2a"><span class="gap-seg-t" style="color:#2a3d52">${nf}</span></div>`:""}
+        ${sT===0?`<div style="flex:1;background:#0b0f1a;border-radius:3px"></div>`:""}
+      </div>
+      <div class="gap-tot">${sT||"—"}</div>
+    </div>`;
+  }).join("");
+
+  // GAP DONUT — named vs anonymous
+  const namedTotal=nOrgs.length+nI.length; // named orgs + named individuals
+  const anonTotal=aOrgs.length+(indivs.length-nI.length); // anon orgs + anon individuals
+  const donutData=[
+    {label:"Named organisations",val:nOrgs.length,color:"#4d9fff"},
+    {label:"Named individuals",val:nI.length,color:"#5a7a96"},
+    {label:"Anonymous",val:anonTotal,color:"#1d2b3a"},
+  ].filter(x=>x.val>0);
+  const cx=60,cy=60,r=50,ir=32;
+  let angle=-Math.PI/2;
+  let paths="";
+  donutData.forEach(seg=>{
+    const pct=seg.val/t;
+    const s=angle;angle+=pct*2*Math.PI;const e=angle;
+    const x1=cx+r*Math.cos(s),y1=cy+r*Math.sin(s);
+    const x2=cx+r*Math.cos(e),y2=cy+r*Math.sin(e);
+    const ix1=cx+ir*Math.cos(s),iy1=cy+ir*Math.sin(s);
+    const ix2=cx+ir*Math.cos(e),iy2=cy+ir*Math.sin(e);
+    const lg=(e-s)>Math.PI?1:0;
+    paths+=`<path d="M ${ix1} ${iy1} A ${ir} ${ir} 0 ${lg} 1 ${ix2} ${iy2} L ${x2} ${y2} A ${r} ${r} 0 ${lg} 0 ${x1} ${y1} Z" fill="${seg.color}" opacity="0.9"/>`;
+  });
+  document.getElementById("gapDonut").innerHTML=paths+
+    `<circle cx="${cx}" cy="${cy}" r="${ir-2}" fill="#0b0f1a"/>
+     <text x="${cx}" y="${cy-4}" text-anchor="middle" font-size="13" fill="#e8eef8" font-family="DM Sans" font-weight="300">${namedTotal}</text>
+     <text x="${cx}" y="${cy+9}" text-anchor="middle" font-size="8" fill="#2a3d52" font-family="DM Mono">identified</text>`;
+  document.getElementById("gapDonutLegend").innerHTML=donutData.map(seg=>`
+    <div style="display:flex;align-items:flex-start;gap:6px;margin-bottom:4px">
+      <div style="width:7px;height:7px;border-radius:2px;background:${seg.color};flex-shrink:0;margin-top:2px"></div>
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:#5a7a96;line-height:1.4">${seg.label}<br><span style="color:#e8eef8;font-weight:400;font-size:11px">${seg.val}</span></div>
+    </div>`).join("");
 
   renderTable(d);
 }
 
 function renderTable(d){
-  let named=d.filter(r=>
-    !r.org.startsWith("Individual respondent")&&
-    !r.org.startsWith("Anonymous organisation")
-  );
-  if(searchTerm){
-    const s=searchTerm.toLowerCase();
-    named=named.filter(r=>r.org.toLowerCase().includes(s)||r.sector.toLowerCase().includes(s));
-  }
-  if(sortCol){
-    named.sort((a,b)=>sortDir*(a[sortCol]||"").localeCompare(b[sortCol]||""));
-  }
-  document.getElementById("tblCount").textContent=`${named.length} identifiable respondents`;
-  document.getElementById("tblBody").innerHTML=named.map(r=>`<tr>
+  let rows=d.filter(r=>!r.org.startsWith("Individual respondent")&&!r.org.startsWith("Anonymous organisation"));
+  if(st){const s=st.toLowerCase();rows=rows.filter(r=>r.org.toLowerCase().includes(s)||r.sector.toLowerCase().includes(s));}
+  if(sc) rows.sort((a,b)=>sd*(a[sc]||"").localeCompare(b[sc]||""));
+  else rows.sort((a,b)=>a.org.localeCompare(b.org));
+  document.getElementById("tblCount").textContent=`${rows.length} identifiable respondents`;
+  document.getElementById("tblBody").innerHTML=rows.map(r=>`<tr>
     <td title="${r.org}">${r.org}</td>
-    <td><span class="badge" style="background:${SCOL[r.sector]}18;color:${SCOL[r.sector]}">${r.sector.replace("/Citizen","").replace("/NGO","").replace("/Development","").replace("/Industry","")}</span></td>
-    <td style="color:#475569">${r.type}</td>
+    <td><span class="badge" style="background:${SC[r.sector]}14;color:${SC[r.sector]};border:1px solid ${SC[r.sector]}22">${r.sector.replace("/Citizen","").replace("/NGO","").replace("/Development","").replace("/Industry","")}</span></td>
+    <td>${r.type}</td>
     <td>${r.has_further_info?`<span class="fi-yes">◆ yes</span>`:""}</td>
-    <td>${r.url?`<a href="${r.url}" target="_blank" class="src-link">View →</a>`:""}</td>
+    <td>${r.url?`<a href="${r.url}" target="_blank" class="src">View →</a>`:""}</td>
   </tr>`).join("");
 }
 
-function sortTable(col){
-  if(sortCol===col) sortDir*=-1; else{sortCol=col;sortDir=1;}
-  renderTable(getFiltered());
-}
-
-document.getElementById("tblSearch").addEventListener("input",e=>{
-  searchTerm=e.target.value;renderTable(getFiltered());
-});
-
-function setFilter(f){
-  activeFilter=activeFilter===f?"all":f;render();
-}
-
+function srt(col){if(sc===col)sd*=-1;else{sc=col;sd=1;}renderTable(gf());}
+document.getElementById("tblSearch").addEventListener("input",e=>{st=e.target.value;renderTable(gf());});
+function setF(f){af=af===f?"all":f;render();}
 render();
 </script>
 </body>
